@@ -53,7 +53,7 @@ public class DesignsServiceImpl implements DesignsService {
 
         if (sjlist != null && sjlist.size() > 0) {
             for (DesFiles desFiles : sjlist) {
-                File sourceFile = new File(filePathComponent.getTempFolder(), desFiles.getUrl());
+                File sourceFile = new File(filePathComponent.getTempFolder(), desFiles.getUrlfix());
                 File destFile = new File(filePathComponent.getLogosFolder());
                 try {
                     FileUtil.move(sourceFile, destFile, true);
@@ -68,7 +68,7 @@ public class DesignsServiceImpl implements DesignsService {
 
         if (xglist != null && xglist.size() > 0) {
             for (DesFiles desFiles : xglist) {
-                File sourceFile = new File(filePathComponent.getTempFolder(), desFiles.getUrl());
+                File sourceFile = new File(filePathComponent.getTempFolder(), desFiles.getUrlfix());
                 File destFile = new File(filePathComponent.getLogosFolder());
                 try {
                     FileUtil.move(sourceFile, destFile, true);

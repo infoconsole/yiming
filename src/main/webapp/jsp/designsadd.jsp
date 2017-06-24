@@ -78,6 +78,9 @@
                                 <th data-options="field:'url',hidden:true">
                                     图片url
                                 </th>
+                                <th data-options="field:'urlfix',hidden:true">
+                                    图片url
+                                </th>
                                 <th data-options="field:'content',width:600" editor="{type:'textbox'}">图片描述</th>
                             </tr>
                             </thead>
@@ -122,6 +125,9 @@
                                     图片名称
                                 </th>
                                 <th data-options="field:'url',hidden:true">
+                                    图片url
+                                </th>
+                                <th data-options="field:'urlfix',hidden:true">
                                     图片url
                                 </th>
                                 <th data-options="field:'content',width:600" editor="{type:'textbox'}">图片描述</th>

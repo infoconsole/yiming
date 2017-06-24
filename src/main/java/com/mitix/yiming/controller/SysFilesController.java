@@ -65,6 +65,7 @@ public class SysFilesController {
                 //不传输ID了 进行自增长
 //                ret.put("id", id);
                 ret.put("url", urlId);
+                ret.put("urlfix", filenamenew);
                 ResponseObject<Map<String, String>> responseObject = new ResponseObject<>();
                 responseObject.setRows(ret);
                 return responseObject;

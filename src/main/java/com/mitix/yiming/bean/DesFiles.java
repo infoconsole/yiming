@@ -9,9 +9,18 @@ public class DesFiles {
     private String designcode;
     private String type;
     private String url;
+    private String urlfix;
     private String content;
     private String extend1;
     private String extend2;
+
+    public String getUrlfix() {
+        return urlfix;
+    }
+
+    public void setUrlfix(String urlfix) {
+        this.urlfix = urlfix;
+    }
 
     public String getExtend1() {
         return extend1;
