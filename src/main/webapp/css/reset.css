@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+/* 定义通用内边距尺寸 */
+.p5{padding:5px;}
+.p10{padding:10px;}
+.p15{padding:15px;}
+.p20{padding:20px;}
+.pt5{padding-top:5px;}
+.pt10{padding-top:10px;}
+.pt15{padding-top:15px;}
+.pt20{padding-top:20px;}
+.pb5{padding-bottom:5px;}
+.pb10{padding-bottom:10px;}
+.pb15{padding-bottom:15px;}
+.pb20{padding-bottom:20px;}
+.pl5{padding-left:5px;}
+.pl10{padding-left:10px;}
+.pl15{padding-left:15px;}
+.pl20{padding-left:20px;}
+.pr5{padding-right:5px;}
+.pr10{padding-right:10px;}
+.pr15{padding-right:15px;}
+.pr20{padding-right:20px;}
+
+/* 定义通用外边距尺寸 */
+.mauto{margin-left:auto; margin-right:auto;} /* 定义margin居中的样式 */
+.m5{margin:5px;}
+.m10{margin:10px;}
+.m15{margin:15px;}
+.m20{margin:20px;}
+.mt5{margin-top:5px;}
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top:20px;}
+.mt30{margin-top:30px;}
+.mt40{margin-top:40px;}
+.mt50{margin-top:50px;}
+.mb5{margin-bottom:5px;}
+.mb10{margin-bottom:10px;}
+.mb15{margin-bottom:15px;}
+.mb20{margin-bottom:20px;}
+.ml5{margin-left:5px;}
+.ml10{margin-left:10px;}
+.ml15{margin-left:15px;}
+.ml20{margin-left:20px;}
+.mr5{margin-right:5px;}
+.mr10{margin-right:10px;}
+.mr15{margin-right:15px;}
+.mr20{margin-right:20px;}
+
+/* 定义清除浮动的样式 */
+.clearfix:after{content:"."; display:block; height:0; clear:both; visibility:hidden;}
+.clearfix{display:inline-block;}
+.clearFix{width:990px; margin:0 auto;}
+/* hides from ie-mac \*/
+* html .clearfix{height:1%;}
+.clearfix{display:block;}
+/* end hide from ie-mac */
+.clr{clear:both; height:0; line-height:0; font-size:0;} /* 简易清除浮动 */
+
+/* 定义隐藏属性 */
+.none{display:none;}
+.hidden{visibility:hidden;}
+.visible{visibility:visible;}
+
+/* 定义浮动 */
+.fleft{float:left;}
+.fright{float:right;}
+
+/* 定义定位 */
+.relative{position:relative;}
+.absolute{position:absolute;}
+
+/* 定义取消字体下划线 */
+.nonline:hover, .nonline a:hover{text-decoration:none;}
+
+/* 定义文字超出部分用省略号代替 */
+.ellipsis{
+	overflow:hidden;
+	white-space:nowrap;
+	-o-text-overflow:ellipsis; /* Opera */
+	text-overflow:ellipsis; /* IE, Safari (WebKit) */
+	_width: 100%; /* IE6 需要定义宽度 */
+}

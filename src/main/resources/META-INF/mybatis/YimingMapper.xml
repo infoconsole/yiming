@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mitix.yiming.mapper.YiMingMapper">
+    <select id="selectCompanyExists" resultType="java.lang.Integer">
+        select count(1) from company;
+    </select>
+    <update id="updateCompany" parameterType="java.util.Map">
+        update company
+        <trim prefix="set" suffixOverrides=",">
+            <if test="companyname != null and companyname != ''">
+                companyname = #{companyname,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null and logo != ''">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="joinhands != null and joinhands != ''">
+                joinhands = #{joinhands,jdbcType=VARCHAR},
+            </if>
+            <if test="workmanship != null and workmanship != ''">
+                workmanship = #{workmanship,jdbcType=VARCHAR},
+            </if>
+            <if test="securitycode != null and securitycode != ''">
+                securitycode = #{securitycode,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="extend1 != null and extend1 != ''">
+                extend1 = #{extend1,jdbcType=VARCHAR},
+            </if>
+            <if test="extend2 != null and extend2 != ''">
+                extend2 = #{extend2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        WHERE 1=1 LIMIT 1
+    </update>
+    <insert id="insertCompany" parameterType="java.util.Map">
+        INSERT INTO company (companyname, logo, address, tel, joinhands, workmanship, securitycode, content, extend1, extend2)
+        VALUES (#{companyname, jdbcType = VARCHAR},#{logo, jdbcType = VARCHAR},
+        #{address, jdbcType = VARCHAR},#{tel, jdbcType = VARCHAR},#{joinhands, jdbcType = VARCHAR},
+        #{workmanship, jdbcType = VARCHAR},#{securitycode, jdbcType = VARCHAR},#{content, jdbcType = VARCHAR},
+        #{extend1, jdbcType = VARCHAR},#{extend2, jdbcType = VARCHAR})
+    </insert>
+    <select id="selectCompany" resultType="com.mitix.yiming.bean.Company">
+        SELECT
+          companyname,
+          logo,
+          address,
+          tel,
+          joinhands,
+          workmanship,
+          securitycode,
+          content,
+          extend1,
+          extend2
+        FROM company
+        LIMIT 1
+    </select>
+    <select id="selectSeriesExists" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from series where seriescode=#{seriescode, jdbcType = VARCHAR}
+    </select>
+    <select id="selectLiningsExists" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from linings where liningcode=#{liningcode, jdbcType = VARCHAR}
+    </select>
+    <insert id="insertSeries" parameterType="java.util.Map">
+        INSERT INTO series(seriescode,seriesname,seriescontent)
+        VALUES (#{seriescode, jdbcType = VARCHAR},#{seriesname, jdbcType = VARCHAR},
+        #{seriescontent, jdbcType = VARCHAR})
+    </insert>
+    <select id="selectSeriesCombox" resultType="com.mitix.yiming.Combox">
+        SELECT seriescode AS id,
+                concat(seriescode,'-',seriesname) AS text
+        FROM series
+        ORDER BY seriescode
+    </select>
+    <select id="selectSeries" resultType="com.mitix.yiming.bean.Series">
+        SELECT
+              seriescode,
+              seriesname,
+              seriescontent,
+              extend1,
+              extend2
+            FROM series
+            where 1=1
+    </select>
+    <insert id="insertLinings" parameterType="java.util.Map">
+        INSERT INTO linings(seriescode, liningcode, liningname, liningcolor, liningcolorurl)
+         VALUES (#{seriescode, jdbcType = VARCHAR},#{liningcode, jdbcType = VARCHAR},
+         #{liningname, jdbcType = VARCHAR},#{liningcolor, jdbcType = VARCHAR},#{liningcolorurl, jdbcType = VARCHAR})
+    </insert>
+    <select id="selectLinings" resultType="com.mitix.yiming.bean.Linings">
+        SELECT  seriescode, liningcode, liningname, liningcolor, liningcolorurl,extend1,extend2 FROM linings where 1=1
+    </select>
+    <select id="listSeriesLining" parameterType="java.util.Map" resultType="com.mitix.yiming.SeriesLining">
+        SELECT
+        ts.seriescode,
+        ts.seriesname,
+        ts.seriescontent,
+        tl.liningcode,
+        tl.liningname,
+        tl.liningcolor,
+        tl.liningcolorurl
+        FROM series ts LEFT JOIN linings tl ON ts.seriescode = tl.seriescode
+        WHERE 1=1
+        <if test="seriescode != null and seriescode != ''">
+            AND ts.seriescode LIKE concat('%',#{seriescode,jdbcType=VARCHAR},'%')
+        </if>
+        <if test="seriesname != null and seriesname != ''">
+            AND ts.seriesname LIKE concat('%',#{seriesname,jdbcType=VARCHAR},'%')
+        </if>
+        ORDER BY ts.seriescode ,tl.liningcode
+    </select>
+    <select id="selectFiles" resultType="com.mitix.yiming.bean.DesFiles" parameterType="java.lang.String">
+        SELECT
+          f.designcode,
+          f.id,
+          f.type,
+          f.url,
+          f.content
+        FROM files f
+        WHERE f.designcode IN (SELECT d.designcode
+                               FROM designs d
+                               WHERE liningcode = #{liningcode, jdbcType = VARCHAR})
+     </select>
+    <select id="selectFilesByDesigns" resultType="com.mitix.yiming.bean.DesFiles" parameterType="java.lang.String">
+          SELECT
+          f.designcode,
+          f.id,
+          f.type,
+          f.url,
+          f.content
+        FROM files f
+        WHERE f.designcode =#{designcode, jdbcType = VARCHAR}
+    </select>
+    <delete id="deleteFiles" parameterType="java.lang.String">
+        DELETE from files where id = #{id, jdbcType = VARCHAR}
+     </delete>
+    <delete id="deleteDesigns" parameterType="java.lang.String">
+        DELETE FROM designs WHERE liningcode = #{liningcode, jdbcType = VARCHAR}
+    </delete>
+    <delete id="deleteDesignsByDesigns" parameterType="java.lang.String">
+        DELETE FROM designs WHERE designcode = #{designcode, jdbcType = VARCHAR}
+    </delete>
+    <delete id="deleteLinings" parameterType="java.lang.String">
+        DELETE FROM linings WHERE liningcode = #{liningcode, jdbcType = VARCHAR}
+    </delete>
+    <select id="selectCountExcludes" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM linings WHERE liningcode != #{liningcode, jdbcType = VARCHAR}
+        AND  seriescode = #{seriescode,jdbcType=VARCHAR}
+    </select>
+    <select id="deleteSeries" parameterType="java.lang.String">
+        DELETE FROM series WHERE seriescode = #{seriescode, jdbcType = VARCHAR}
+    </select>
+    <insert id="insertDesigns" parameterType="com.mitix.yiming.bean.Designs">
+        INSERT INTO designs (liningcode, designcode, designname, extend1, extend2)
+        VALUES (#{liningcode, jdbcType = VARCHAR},#{designcode, jdbcType = VARCHAR},#{designname, jdbcType = VARCHAR},
+        #{extend1, jdbcType = VARCHAR},#{extend2, jdbcType = VARCHAR})
+    </insert>
+    <insert id="insertFiles" parameterType="com.mitix.yiming.bean.DesFiles">
+        INSERT INTO files (designcode, type, url, content)
+        VALUES (#{designcode, jdbcType = VARCHAR},#{type, jdbcType = VARCHAR},
+        #{url, jdbcType = VARCHAR},#{content, jdbcType = VARCHAR})
+    </insert>
+    <select id="selectDisignsExists" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM designs WHERE liningcode = #{liningcode, jdbcType = VARCHAR}
+        AND  designname = #{designname,jdbcType=VARCHAR}
+    </select>
+    <select id="listLiningsDesigns" parameterType="java.util.Map" resultType="com.mitix.yiming.bean.Designs">
+        SELECT liningcode,designcode,designname FROM designs
+        WHERE 1=1
+        <if test="liningcode != null and liningcode != ''">AND
+            AND liningcode like concat('%',#{liningcode,jdbcType=VARCHAR},'%')
+        </if>
+    </select>
+    <select id="selectDesigns" resultType="com.mitix.yiming.bean.Designs">
+        SELECT liningcode, designcode, designname, extend1, extend2
+        FROM designs where 1=1
+    </select>
+    <select id="selectDesFiles" resultType="com.mitix.yiming.bean.DesFiles">
+        SELECT id, designcode, type, url, content,extend1, extend2 FROM files where 1=1
+    </select>
+</mapper>
