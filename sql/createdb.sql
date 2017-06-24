@@ -6,3 +6,6 @@ GRANT SELECT, DELETE, UPDATE, CREATE, DROP ON yiming.* TO yiming@'%'
 IDENTIFIED BY 'Aa123456!@@';
 
 flush privileges;
+
+
+

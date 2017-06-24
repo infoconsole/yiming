@@ -1,6 +1,9 @@
 package com.mitix.yiming.service.impl;
 
 import com.mitix.yiming.FileUtil;
+import com.mitix.yiming.controller.CompanyController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -12,6 +15,8 @@ import java.io.File;
  */
 @Service
 public class FilePathComponent implements InitializingBean {
+    private static final Logger logger = LoggerFactory.getLogger(FilePathComponent.class);
+
 
     @Value("${datapath}")
     private String dataPath;
@@ -28,10 +33,12 @@ public class FilePathComponent implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         if (!dataPath.endsWith(File.separator)) {
             logosFolder = dataPath + File.separator + logosPath + File.separator;
+            logger.info("image path is"+logosFolder);
             if (!FileUtil.isExist(logosFolder)) {
                 FileUtil.createFolder(logosFolder);
             }
             tempFolder = dataPath + File.separator + tempPath + File.separator;
+            logger.info("tmp path is "+ tempFolder);
             if (FileUtil.isExist(tempFolder)) {
                 FileUtil.deleteFile(tempFolder);
             }

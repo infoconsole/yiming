@@ -99,6 +99,7 @@ public class FileUtil {
         }
 
         if (file.isDirectory()) {
+            String abspath=file.getAbsolutePath();
             File[] files = file.listFiles();
             for (File childFile : files) {
                 boolean isOk = deleteFile(childFile);

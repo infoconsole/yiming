@@ -64,7 +64,7 @@ public class CompanyController {
                     String extend2,
             MultipartFile file
     ) {
-        String urlId;
+        String urlId = null;
         String filenamenew = null;
         if (file != null && file.getSize() > 0) {
             urlId = SIDUtil.getUUID16();
@@ -84,7 +84,7 @@ public class CompanyController {
                 return "logo格式不正确";
             }
         }
-        companyService.saveorupdate(companyname, address, tel, joinhands, workmanship, securitycode, content, extend1, extend2, filenamenew);
+        companyService.saveorupdate(companyname, address, tel, joinhands, workmanship, securitycode, content, extend1, extend2, urlId);
         return "修改成功";
     }
 

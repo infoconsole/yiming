@@ -92,7 +92,7 @@ public class SeriesController {
                     String liningcolor,
             MultipartFile file) {
         try {
-            String urlId;
+            String urlId=null;
             String filenamenew = null;
             if (file != null && file.getSize() > 0) {
                 urlId = SIDUtil.getUUID16();
@@ -112,7 +112,7 @@ public class SeriesController {
                     return "色卡格式不正确";
                 }
             }
-            seriesService.saveLinings(seriescode, liningcode, liningname, liningcolor, filenamenew);
+            seriesService.saveLinings(seriescode, liningcode, liningname, liningcolor, urlId);
             return "success";
         } catch (Exception e) {
             logger.error("保存系列失败", e);

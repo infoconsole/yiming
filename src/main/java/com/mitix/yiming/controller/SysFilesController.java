@@ -42,15 +42,15 @@ public class SysFilesController {
     @RequestMapping(value = "/fileupload.do", method = RequestMethod.POST)
     @ResponseBody
     public Response fileUpLoad(MultipartFile upload) {
-        String id;
+        String urlId=null;
         String filenamenew = null;
         if (upload != null && upload.getSize() > 0) {
-            id = SIDUtil.getUUID16();
+            urlId = SIDUtil.getUUID16();
             String fileName = upload.getOriginalFilename();
             if (fileName.lastIndexOf(".") > -1) {
                 //后缀
                 String prefix = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-                filenamenew = id + "." + prefix;
+                filenamenew = urlId + "." + prefix;
                 File filepath = new File(filePathComponent.getTempFolder(), filenamenew);
                 try {
                     upload.transferTo(filepath);
@@ -64,7 +64,7 @@ public class SysFilesController {
                 Map<String, String> ret = new HashMap<>();
                 //不传输ID了 进行自增长
 //                ret.put("id", id);
-                ret.put("url", filenamenew);
+                ret.put("url", urlId);
                 ResponseObject<Map<String, String>> responseObject = new ResponseObject<>();
                 responseObject.setRows(ret);
                 return responseObject;
