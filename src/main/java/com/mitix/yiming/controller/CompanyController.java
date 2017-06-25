@@ -93,6 +93,8 @@ public class CompanyController {
         return companyService.getcompany();
     }
 
+
+
     @RequestMapping(value = "/downdb.do")
     public String downdb(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String dataPath = filePathComponent.getDataPath();

@@ -33,6 +33,8 @@
                    id="_search_des">查询设计</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true"
                    id="_create_des">新增设计</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true"
+                   id="_update_des">修改设计</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true"
                    id="_delete_des">删除设计</a>
             </div>
@@ -75,6 +77,21 @@
         $("#_create_des").click(function () {
             common.openWin("新增系列信息", "/showdesignsadd.do",
                 1366, 768, "insertDesWin");
+        });
+
+        //新建按钮
+        $("#_update_des").click(function () {
+
+            var _rowData = $("#designs_dg").datagrid("getSelected");
+            if (_rowData == null || _rowData.length == 0) {
+                messager.alert("请选择要操作的数据！");
+                return;
+            }
+            common.openWin("新增系列信息", "/showdesignsupdate.do",
+                1366, 768, "insertUpdateWin",{
+                    designcode: _rowData.designcode,
+                    liningcode: _rowData.liningcode
+                });
         });
 
         //删除按钮监听

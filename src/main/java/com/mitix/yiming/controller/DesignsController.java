@@ -33,6 +33,11 @@ public class DesignsController {
         return "designsadd";
     }
 
+    @RequestMapping(value = "/showdesignsupdate.do")
+    public String showDesignsUpdate() {
+        return "designsupdate";
+    }
+
     @RequestMapping(value = "/savedesigns.do", method = RequestMethod.POST)
     @ResponseBody
     public Response saveDesigns(

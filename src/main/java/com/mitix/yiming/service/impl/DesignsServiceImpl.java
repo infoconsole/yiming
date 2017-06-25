@@ -34,7 +34,7 @@ public class DesignsServiceImpl implements DesignsService {
         String designnameTouse = designname.trim();
         int count = yiMingMapper.selectLiningsExists(liningcodeTouse);
         if (count == 0) {
-            throw new RuntimeException("请正确天蝎布料信息");
+            throw new RuntimeException("请正确填写布料信息");
         }
         Map<String, Object> map = new HashMap<>();
         map.put("liningcode", liningcodeTouse);

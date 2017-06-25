@@ -103,6 +103,14 @@
         $("#_down_db").click(function () {
             window.location.href = '/downdb.do';
         });
+
+        $("#_z_pic").click(function () {
+            ajaxUtil.post("/zpic.do", null, false, function (data) {
+                if (data.status == 1) {
+                    messager.msg(3, "图片整理完成");
+                }
+            });
+        });
     }
 
 

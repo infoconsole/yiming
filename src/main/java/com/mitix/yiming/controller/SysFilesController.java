@@ -4,11 +4,13 @@ import com.mitix.yiming.FileUtil;
 import com.mitix.yiming.Response;
 import com.mitix.yiming.ResponseObject;
 import com.mitix.yiming.SIDUtil;
+import com.mitix.yiming.service.ZpicService;
 import com.mitix.yiming.service.impl.FilePathComponent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +35,8 @@ public class SysFilesController {
 
     @Autowired
     private FilePathComponent filePathComponent;
-
+    @Autowired
+    private ZpicService zpicService;
     /**
      * 保存
      *
@@ -97,6 +100,13 @@ public class SysFilesController {
         }
         Response response = new Response();
         return response;
+    }
+
+    @RequestMapping(value = "/zpic.do",method = RequestMethod.POST)
+    @ResponseBody
+    public Response zPic(){
+        zpicService.zpic();
+        return new Response();
     }
 
 
