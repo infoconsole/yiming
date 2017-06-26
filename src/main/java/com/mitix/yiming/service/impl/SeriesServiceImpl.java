@@ -89,7 +89,7 @@ public class SeriesServiceImpl implements SeriesService {
         if (desFilesList != null && desFilesList.size() > 0) {
             for (DesFiles desFiles : desFilesList) {
                 try {
-                    String filenamenew = desFiles.getUrl();
+                    String filenamenew = desFiles.getUrlfix();
                     File filepath = new File(filePathComponent.getLogosFolder(), filenamenew);
                     filepath.delete();
                 } catch (Exception e) {

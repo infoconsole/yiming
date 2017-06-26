@@ -268,7 +268,7 @@
                 }
                 $.messager.confirm("提示信息", "确定要删除该图片吗", function (r) {
                     if (r) {
-                        ajaxUtil.post("/deleteFile.do", {url: rows.url}, false, function (data) {
+                        ajaxUtil.post("/deleteFile.do", {urlfix: rows.urlfix}, false, function (data) {
                             if (data.status == 1) {
                                 messager.msg(3, "删除附件信息成功");
                             }
@@ -288,7 +288,7 @@
                 }
                 $.messager.confirm("提示信息", "确定要删除该图片吗", function (r) {
                     if (r) {
-                        ajaxUtil.post("/deleteFile.do", {url: rows.url}, false, function (data) {
+                        ajaxUtil.post("/deleteFile.do", {urlfix: rows.urlfix}, false, function (data) {
                             if (data.status == 1) {
                                 messager.msg(3, "删除附件信息成功");
                             }

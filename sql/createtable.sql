@@ -66,6 +66,7 @@ CREATE TABLE files
   designcode VARCHAR(32),
   type       VARCHAR(8),
   url        VARCHAR(256),
+  urlfix     VARCHAR(256),
   content    VARCHAR(2046),
   extend1    VARCHAR(128),
   extend2    VARCHAR(128),

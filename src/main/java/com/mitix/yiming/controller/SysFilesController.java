@@ -86,13 +86,13 @@ public class SysFilesController {
     }
 
     /**
-     * @param url
+     * @param urlfix
      * @return
      */
     @RequestMapping(value = "/deleteFile.do", method = RequestMethod.POST)
     @ResponseBody
-    public Response deleteFile(String url) {
-        File filepath = new File(filePathComponent.getTempFolder(), url);
+    public Response deleteFile(String urlfix) {
+        File filepath = new File(filePathComponent.getTempFolder(), urlfix);
         try {
             FileUtil.deleteFile(filepath);
         } catch (Exception e) {

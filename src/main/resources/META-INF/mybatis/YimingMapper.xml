@@ -135,8 +135,8 @@
         FROM files f
         WHERE f.designcode =#{designcode, jdbcType = VARCHAR}
     </select>
-    <delete id="deleteFiles" parameterType="java.lang.String">
-        DELETE from files where id = #{id, jdbcType = VARCHAR}
+    <delete id="deleteFiles" parameterType="java.lang.Integer">
+        DELETE from files where id = #{id, jdbcType = INTEGER}
      </delete>
     <delete id="deleteDesigns" parameterType="java.lang.String">
         DELETE FROM designs WHERE liningcode = #{liningcode, jdbcType = VARCHAR}
@@ -160,9 +160,9 @@
         #{extend1, jdbcType = VARCHAR},#{extend2, jdbcType = VARCHAR})
     </insert>
     <insert id="insertFiles" parameterType="com.mitix.yiming.bean.DesFiles">
-        INSERT INTO files (designcode, type, url, content)
+        INSERT INTO files (designcode, type, url,urlfix, content)
         VALUES (#{designcode, jdbcType = VARCHAR},#{type, jdbcType = VARCHAR},
-        #{url, jdbcType = VARCHAR},#{content, jdbcType = VARCHAR})
+        #{url, jdbcType = VARCHAR},#{urlfix, jdbcType = VARCHAR},#{content, jdbcType = VARCHAR})
     </insert>
     <select id="selectDisignsExists" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM designs WHERE liningcode = #{liningcode, jdbcType = VARCHAR}
