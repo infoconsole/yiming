@@ -23,14 +23,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * 创建于:2016-5-9<br>
- * 版权所有(C) 2016 杭州吉利易云科技有限公司<br>
- * Dms文件上传相关请求控制类
- *
- * @author Hong.LvHang
- * @version 1.0.0
- */
+
 @Controller
 public class SysFilesController {
     private static final Logger logger = LoggerFactory.getLogger(CompanyController.class);
