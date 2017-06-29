@@ -1,6 +1,7 @@
 package com.mitix.yiming.controller;
 
 import com.mitix.yiming.FileUtil;
+import com.mitix.yiming.ImageCompressUtil;
 import com.mitix.yiming.Response;
 import com.mitix.yiming.ResponseObject;
 import com.mitix.yiming.SIDUtil;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +39,7 @@ public class SysFilesController {
     private FilePathComponent filePathComponent;
     @Autowired
     private ZpicService zpicService;
+
     /**
      * 保存
      *
@@ -44,8 +47,8 @@ public class SysFilesController {
      */
     @RequestMapping(value = "/fileupload.do", method = RequestMethod.POST)
     @ResponseBody
-    public Response fileUpLoad(MultipartFile upload) {
-        String urlId=null;
+    public Response fileUpLoad(MultipartFile upload) throws Exception {
+        String urlId = null;
         String filenamenew = null;
         if (upload != null && upload.getSize() > 0) {
             urlId = SIDUtil.getUUID16();
@@ -54,9 +57,10 @@ public class SysFilesController {
                 //后缀
                 String prefix = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
                 filenamenew = urlId + "." + prefix;
-                File filepath = new File(filePathComponent.getTempFolder(), filenamenew);
                 try {
-                    upload.transferTo(filepath);
+                    InputStream inputStream = upload.getInputStream();
+                    String fileStr = filePathComponent.getTempFolder() + filenamenew;
+                    ImageCompressUtil.saveMinPhoto(inputStream, fileStr, (double) 1920, (double) 1);
                 } catch (IOException e) {
                     logger.error("文件保存失败", e);
                     Response response = new Response();
@@ -102,9 +106,9 @@ public class SysFilesController {
         return response;
     }
 
-    @RequestMapping(value = "/zpic.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/zpic.do", method = RequestMethod.POST)
     @ResponseBody
-    public Response zPic(){
+    public Response zPic() {
         zpicService.zpic();
         return new Response();
     }
