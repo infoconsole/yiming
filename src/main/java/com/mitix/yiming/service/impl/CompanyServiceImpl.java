@@ -1,5 +1,6 @@
 package com.mitix.yiming.service.impl;
 
+import com.mitix.yiming.ContextUtils;
 import com.mitix.yiming.bean.Company;
 import com.mitix.yiming.mapper.YiMingMapper;
 import com.mitix.yiming.service.CompanyService;
@@ -24,10 +25,10 @@ public class CompanyServiceImpl implements CompanyService {
         param.put("companyname", companyname);
         param.put("address", address);
         param.put("tel", tel);
-        param.put("joinhands", joinhands);
-        param.put("workmanship", workmanship);
+        param.put("joinhands", ContextUtils.formatter(joinhands));
+        param.put("workmanship", ContextUtils.formatter(workmanship));
         param.put("securitycode", securitycode);
-        param.put("content", content);
+        param.put("content", ContextUtils.formatter(content));
         param.put("extend1", extend1);
         param.put("extend2", extend2);
         param.put("logo", filenamenew);
@@ -40,7 +41,11 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Company getcompany() {
-        return yiMingMapper.selectCompany();
+        Company company = yiMingMapper.selectCompany();
+        company.setJoinhands(ContextUtils.reformatter(company.getJoinhands()));
+        company.setWorkmanship(ContextUtils.reformatter(company.getWorkmanship()));
+        company.setContent(ContextUtils.reformatter(company.getContent()));
+        return company;
     }
 
 }

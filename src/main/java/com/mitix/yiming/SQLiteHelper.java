@@ -15,11 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-/**
- * sqlite 本地数据库
- *
- * @author jianguo.shi
- */
+
 public class SQLiteHelper {
 
     private Connection conn;

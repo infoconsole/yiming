@@ -1,6 +1,8 @@
 package com.mitix.yiming.controller;
 
 import com.mitix.yiming.Combox;
+import com.mitix.yiming.ContextUtils;
+import com.mitix.yiming.ImageCompressUtil;
 import com.mitix.yiming.Response;
 import com.mitix.yiming.ResponseObject;
 import com.mitix.yiming.SIDUtil;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -92,7 +95,7 @@ public class SeriesController {
                     String liningcolor,
             MultipartFile file) {
         try {
-            String urlId=null;
+            String urlId = null;
             String filenamenew = null;
             if (file != null && file.getSize() > 0) {
                 urlId = SIDUtil.getUUID16();
@@ -101,9 +104,10 @@ public class SeriesController {
                     //后缀
                     String prefix = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
                     filenamenew = urlId + "." + prefix;
-                    File filepath = new File(filePathComponent.getLogosFolder(), filenamenew);
                     try {
-                        file.transferTo(filepath);
+                        InputStream inputStream = file.getInputStream();
+                        String fileStr = filePathComponent.getTempFolder() + filenamenew;
+                        ImageCompressUtil.zipImageFile(inputStream, fileStr, 156, 90, 1f);
                     } catch (IOException e) {
                         logger.error("文件保存失败", e);
                         throw new Exception("图片保存失败");
@@ -128,6 +132,9 @@ public class SeriesController {
             @RequestParam(value = "sname", required = false)
                     String sname) {
         List<SeriesLining> seriesLiningList = seriesService.listSeriesLining(scode, sname);
+        for (SeriesLining seriesLining : seriesLiningList) {
+            seriesLining.setSeriescontent(ContextUtils.reformatter(seriesLining.getSeriescontent()));
+        }
         ResponseObject<List<SeriesLining>> responseObject = new ResponseObject<>();
         responseObject.setRows(seriesLiningList);
         return responseObject;

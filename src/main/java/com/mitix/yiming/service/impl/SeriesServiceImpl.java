@@ -1,6 +1,7 @@
 package com.mitix.yiming.service.impl;
 
 import com.mitix.yiming.Combox;
+import com.mitix.yiming.ContextUtils;
 import com.mitix.yiming.SeriesLining;
 import com.mitix.yiming.bean.DesFiles;
 import com.mitix.yiming.mapper.YiMingMapper;
@@ -35,7 +36,7 @@ public class SeriesServiceImpl implements SeriesService {
         Map<String, Object> param = new HashMap<>();
         param.put("seriescode", seriescodeTouse);
         param.put("seriesname", seriesname);
-        param.put("seriescontent", seriescontent);
+        param.put("seriescontent", ContextUtils.formatter(seriescontent));
         yiMingMapper.insertSeries(param);
     }
 

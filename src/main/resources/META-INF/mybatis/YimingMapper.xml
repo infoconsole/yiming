@@ -16,6 +16,9 @@
             <if test="address != null and address != ''">
                 address = #{address,jdbcType=VARCHAR},
             </if>
+            <if test="tel != null and tel != ''">
+                tel = #{tel,jdbcType=VARCHAR},
+            </if>
             <if test="joinhands != null and joinhands != ''">
                 joinhands = #{joinhands,jdbcType=VARCHAR},
             </if>

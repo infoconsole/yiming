@@ -2,14 +2,7 @@ package com.mitix.yiming;
 
 import java.io.UnsupportedEncodingException;
 
-/**
- * 创建于:2014-12-5<br>
- * 版权所有(C) 2014 深圳市银之杰科技股份有限公司<br>
- * 字符串处理
- *
- * @author honglvhang
- * @version 1.0.0.0
- */
+
 public class StringUtil {
     /**
      * 点号.

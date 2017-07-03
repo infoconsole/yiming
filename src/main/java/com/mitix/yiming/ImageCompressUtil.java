@@ -19,30 +19,22 @@ public class ImageCompressUtil {
      * (先保存原文件，再压缩、上传)
      * 壹拍项目中用于二维码压缩
      *
-     * @param oldFile   要进行压缩的文件全路径
-     * @param width     压缩后的宽度
-     * @param height    压缩后的高度
-     * @param quality   压缩质量
-     * @param smallIcon 文件名的小小后缀(注意，非文件后缀名称),入压缩文件名是yasuo.jpg,则压缩后文件名是yasuo(+smallIcon).jpg
+     * @param deskURL
+     * @param width   压缩后的宽度
+     * @param height  压缩后的高度
+     * @param quality 压缩质量
      * @return 返回压缩后的文件的全路径
      */
-    public static String zipImageFile(String oldFile, int width, int height,
-                                      float quality, String smallIcon) {
-        if (oldFile == null) {
-            return null;
-        }
+    public static String zipImageFile(InputStream inputStream, String deskURL, int width, int height,
+                                      float quality) {
         String newImage = null;
         try {
             /**对服务器上的临时文件进行处理 */
-            Image srcFile = ImageIO.read(new File(oldFile));
+            Image srcFile = ImageIO.read(inputStream);
             /** 宽,高设定 */
             BufferedImage tag = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             tag.getGraphics().drawImage(srcFile, 0, 0, width, height, null);
-            String filePrex = oldFile.substring(0, oldFile.indexOf('.'));
-            /** 压缩后的文件名 */
-            newImage = filePrex + smallIcon + oldFile.substring(filePrex.length());
-            /** 压缩之后临时存放位置 */
-            FileOutputStream out = new FileOutputStream(newImage);
+            FileOutputStream out = new FileOutputStream(deskURL);
             JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
             JPEGEncodeParam jep = JPEGCodec.getDefaultJPEGEncodeParam(tag);
             /** 压缩质量 */
@@ -55,35 +47,6 @@ public class ImageCompressUtil {
             e.printStackTrace();
         }
         return newImage;
-    }
-
-    /**
-     * 保存文件到服务器临时路径(用于文件上传)
-     *
-     * @param fileName
-     * @param is
-     * @return 文件全路径
-     */
-    public static String writeFile(String fileName, InputStream is) {
-        if (fileName == null || fileName.trim().length() == 0) {
-            return null;
-        }
-        try {
-            /** 首先保存到临时文件 */
-            FileOutputStream fos = new FileOutputStream(fileName);
-            byte[] readBytes = new byte[512];// 缓冲大小  
-            int readed = 0;
-            while ((readed = is.read(readBytes)) > 0) {
-                fos.write(readBytes, 0, readed);
-            }
-            fos.close();
-            is.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return fileName;
     }
 
     /**
@@ -141,7 +104,7 @@ public class ImageCompressUtil {
     }
 
     public static void main(String args[]) throws Exception {
-        ImageCompressUtil.zipImageFile("f:/食尸鬼 - 藿香.jpg", 1280, 1280, 1f, "x2");
+//        ImageCompressUtil.zipImageFile("f:/食尸鬼 - 藿香.jpg", 1280, 1280, 1f, "x2");
 //        ImageCompressUtil.saveMinPhoto("f:/食尸鬼 - 藿香.jpg", "f:/11.jpg", 139, 0.9d);
     }
-} 
+}

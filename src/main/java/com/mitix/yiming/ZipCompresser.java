@@ -10,14 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-/**
- * 创建于:2014-3-13<br>
- * 版权所有(C) 2014 深圳市银之杰科技股份有限公司<br>
- * zip压缩工具类，压缩方法建议new对象使用
- *
- * @author honglvhang
- * @version 1.0.0.0
- */
+
 public class ZipCompresser {
     /**
      * 把文档归档到zipFile 支持该路径为一个文件或者一个目录，当ffile为一个目录时，则会压缩目录下所有的文件内容
