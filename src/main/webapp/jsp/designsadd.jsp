@@ -180,7 +180,7 @@
                             if (data.status == 1) {
                                 var dgdata = data.rows;
                                 dgdata.name = _fileName;
-                                dgdata.content = _fileName;
+                                dgdata.content = _fileName.substring(0,_fileName.indexOf("."));
                                 common.insertRow("sj_dg", dgdata);
                                 $('#sj_fileUpload').replaceWith('<input id="sj_fileUpload" type="file" name="upload" style="display: none" />');
                             } else {
@@ -214,7 +214,7 @@
                             if (data.status == 1) {
                                 var dgdata = data.rows;
                                 dgdata.name = _fileName;
-                                dgdata.content = _fileName;
+                                dgdata.content = _fileName.substring(0,_fileName.indexOf("."));
                                 common.insertRow("xg_dg", dgdata);
                                 $('#xg_fileUpload').replaceWith('<input id="xg_fileUpload" type="file" name="upload" style="display: none" />');
                             } else {
