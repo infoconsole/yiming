@@ -17,7 +17,7 @@ public abstract class ContextUtils {
         for (String ct : cts) {
             if (StringUtils.isNotBlank(ct)) {
                 if (!ct.startsWith("<p>")) {
-                    buffer.append("<p>").append(ct).append("</p>");
+                    buffer.append("<p>      ").append(ct).append("</p>");
                 } else {
                     buffer.append(ct);
                 }
@@ -30,7 +30,7 @@ public abstract class ContextUtils {
         if (context == null || context == "") {
             return context;
         }
-        context = context.replaceAll("<p>", "");
+        context = context.replaceAll("<p>", "      ");
         context = context.replaceAll("</p>", "\r\n");
         return context;
     }
