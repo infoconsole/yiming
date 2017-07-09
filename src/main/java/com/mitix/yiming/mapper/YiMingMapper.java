@@ -68,4 +68,14 @@ public interface YiMingMapper {
     List<Designs> selectDesigns();
 
     List<DesFiles> selectDesFiles();
+
+    Designs selectDesignsById(Integer desid);
+
+    List<DesFiles>  listDesFilesByDesignCode(String designcode);
+
+    void updateDesignsById(Map<String, Object> map);
+
+    void updateDesFiles(DesFiles updateDesFile);
+
+    void deleteDesFiles(DesFiles deleteDesFile);
 }

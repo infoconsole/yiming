@@ -102,11 +102,11 @@ public class SeriesController {
                 String fileName = file.getOriginalFilename();
                 if (fileName.lastIndexOf(".") > -1) {
                     //后缀
-                    String prefix = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
-                    filenamenew = urlId + "." + prefix;
+                    //String prefix = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+                    filenamenew = urlId + ".jpg";
                     try {
                         InputStream inputStream = file.getInputStream();
-                        String fileStr = filePathComponent.getTempFolder() + filenamenew;
+                        String fileStr = filePathComponent.getLogosFolder() + filenamenew;
                         ImageCompressUtil.zipImageFile(inputStream, fileStr, 156, 90, 1f);
                     } catch (IOException e) {
                         logger.error("文件保存失败", e);

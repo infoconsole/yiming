@@ -72,3 +72,5 @@ CREATE TABLE files
   extend2    VARCHAR(128),
   PRIMARY KEY (id)
 );
+
+ALTER TABLE yiming.files ADD name VARCHAR(64) NULL;

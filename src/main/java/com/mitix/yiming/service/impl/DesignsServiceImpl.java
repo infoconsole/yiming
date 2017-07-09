@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class DesignsServiceImpl implements DesignsService {
 
     @Override
     @Transactional
-    public void saveDesigns(String liningcode, String designname, List<DesFiles> sjlist, List<DesFiles> xglist) {
+    public void saveDesigns(String liningcode, String designname, List<DesFiles> sjlist/*, List<DesFiles> xglist*/) {
         String liningcodeTouse = liningcode.trim();
         String designnameTouse = designname.trim();
         int count = yiMingMapper.selectLiningsExists(liningcodeTouse);
@@ -61,23 +62,83 @@ public class DesignsServiceImpl implements DesignsService {
                     throw new RuntimeException();
                 }
                 desFiles.setDesigncode(designcode);
-                desFiles.setType("1");
+//                desFiles.setType("1");
                 yiMingMapper.insertFiles(desFiles);
             }
         }
 
-        if (xglist != null && xglist.size() > 0) {
-            for (DesFiles desFiles : xglist) {
-                File sourceFile = new File(filePathComponent.getTempFolder(), desFiles.getUrlfix());
+//        if (xglist != null && xglist.size() > 0) {
+//            for (DesFiles desFiles : xglist) {
+//                File sourceFile = new File(filePathComponent.getTempFolder(), desFiles.getUrlfix());
+//                File destFile = new File(filePathComponent.getLogosFolder());
+//                try {
+//                    FileUtil.move(sourceFile, destFile, true);
+//                } catch (Exception e) {
+//                    throw new RuntimeException();
+//                }
+//                desFiles.setDesigncode(designcode);
+//                desFiles.setType("2");
+//                yiMingMapper.insertFiles(desFiles);
+//            }
+//        }
+    }
+
+    @Transactional
+    @Override
+    public void updateDesigns(Integer id, String liningcode, String designname, List<DesFiles> sjlistList) {
+        String liningcodeTouse = liningcode.trim();
+        String designnameTouse = designname.trim();
+        int count = yiMingMapper.selectLiningsExists(liningcodeTouse);
+        if (count == 0) {
+            throw new RuntimeException("请正确填写布料信息");
+        }
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", id);
+        map.put("designname", designnameTouse);
+        yiMingMapper.updateDesignsById(map);
+
+        Designs designs = yiMingMapper.selectDesignsById(id);
+        List<DesFiles> inFilesList = yiMingMapper.listDesFilesByDesignCode(designs.getDesigncode());
+
+        List<DesFiles> insertDesFiles = new ArrayList<>();
+        List<DesFiles> updateDesFiles = new ArrayList<>();
+        List<DesFiles> deleteDesFiles = new ArrayList<>();
+        List<Integer> updateIdList = new ArrayList<>();
+        for (DesFiles desFiles : sjlistList) {
+            if (desFiles.getId() == null) {
+                insertDesFiles.add(desFiles);
+            } else {
+                updateDesFiles.add(desFiles);
+                updateIdList.add(desFiles.getId());
+            }
+        }
+        for (DesFiles desFiles : inFilesList) {
+            if (!updateIdList.contains(desFiles.getId())) {
+                deleteDesFiles.add(desFiles);
+            }
+        }
+        if (insertDesFiles != null && insertDesFiles.size() > 0) {
+            for (DesFiles insertDesFile : insertDesFiles) {
+                File sourceFile = new File(filePathComponent.getTempFolder(), insertDesFile.getUrlfix());
                 File destFile = new File(filePathComponent.getLogosFolder());
                 try {
                     FileUtil.move(sourceFile, destFile, true);
                 } catch (Exception e) {
                     throw new RuntimeException();
                 }
-                desFiles.setDesigncode(designcode);
-                desFiles.setType("2");
-                yiMingMapper.insertFiles(desFiles);
+                insertDesFile.setDesigncode(designs.getDesigncode());
+                yiMingMapper.insertFiles(insertDesFile);
+            }
+        }
+
+        if (updateDesFiles != null && updateDesFiles.size() > 0) {
+            for (DesFiles updateDesFile : updateDesFiles) {
+                yiMingMapper.updateDesFiles(updateDesFile);
+            }
+        }
+        if (deleteDesFiles != null && deleteDesFiles.size() > 0) {
+            for (DesFiles deleteDesFile : deleteDesFiles) {
+                yiMingMapper.deleteDesFiles(deleteDesFile);
             }
         }
     }
@@ -118,4 +179,15 @@ public class DesignsServiceImpl implements DesignsService {
             }
         }
     }
+
+    @Override
+    public Designs selectById(Integer desid) {
+        return yiMingMapper.selectDesignsById(desid);
+    }
+
+    @Override
+    public List<DesFiles> listDesFilesByDesignCode(String designcode) {
+        return yiMingMapper.listDesFilesByDesignCode(designcode);
+    }
+
 }

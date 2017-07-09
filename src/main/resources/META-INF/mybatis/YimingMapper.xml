@@ -163,16 +163,16 @@
         #{extend1, jdbcType = VARCHAR},#{extend2, jdbcType = VARCHAR})
     </insert>
     <insert id="insertFiles" parameterType="com.mitix.yiming.bean.DesFiles">
-        INSERT INTO files (designcode, type, url,urlfix, content)
+        INSERT INTO files (designcode, type, url,urlfix, content,name)
         VALUES (#{designcode, jdbcType = VARCHAR},#{type, jdbcType = VARCHAR},
-        #{url, jdbcType = VARCHAR},#{urlfix, jdbcType = VARCHAR},#{content, jdbcType = VARCHAR})
+        #{url, jdbcType = VARCHAR},#{urlfix, jdbcType = VARCHAR},#{content, jdbcType = VARCHAR},#{name, jdbcType = VARCHAR})
     </insert>
     <select id="selectDisignsExists" parameterType="java.util.Map" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM designs WHERE liningcode = #{liningcode, jdbcType = VARCHAR}
         AND  designname = #{designname,jdbcType=VARCHAR}
     </select>
     <select id="listLiningsDesigns" parameterType="java.util.Map" resultType="com.mitix.yiming.bean.Designs">
-        SELECT liningcode,designcode,designname FROM designs
+        SELECT id,liningcode,designcode,designname FROM designs
         WHERE 1=1
         <if test="liningcode != null and liningcode != ''">AND
             AND liningcode like concat('%',#{liningcode,jdbcType=VARCHAR},'%')
@@ -185,4 +185,30 @@
     <select id="selectDesFiles" resultType="com.mitix.yiming.bean.DesFiles">
         SELECT id, designcode, type, url, content,extend1, extend2 FROM files where 1=1
     </select>
+    <select id="selectDesignsById" parameterType="java.lang.Integer" resultType="com.mitix.yiming.bean.Designs">
+        SELECT id,liningcode, designcode, designname, extend1, extend2
+        FROM designs
+        where id=#{desid,jdbcType=INTEGER}
+    </select>
+    <select id="listDesFilesByDesignCode" parameterType="java.lang.String" resultType="com.mitix.yiming.bean.DesFiles">
+        SELECT id, designcode , name, type, url, content,extend1, extend2
+        FROM files
+        where 1=1
+        AND designcode= #{designcode,jdbcType=VARCHAR}
+    </select>
+    <update id="updateDesignsById" parameterType="java.util.Map">
+        UPDATE designs
+        SET designname=#{designname,jdbcType=VARCHAR}
+        WHERE id=#{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateDesFiles" parameterType="com.mitix.yiming.bean.DesFiles">
+        UPDATE files
+        SET content= #{content, jdbcType = VARCHAR},
+        type=#{type, jdbcType = VARCHAR}
+        where  1=1 AND  id = #{id,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteDesFiles" parameterType="com.mitix.yiming.bean.DesFiles">
+        DELETE  FROM files
+        WHERE  id = #{id,jdbcType=INTEGER}
+    </delete>
 </mapper>

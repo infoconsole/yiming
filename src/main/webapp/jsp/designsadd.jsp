@@ -37,104 +37,57 @@
             </div>
         </div>
         <div data-options="region:'center'" style="padding:10px;height: 510px">
-            <div id="add_detail" class="easyui-tabs">
-                <div title="设计效果图 &nbsp;&nbsp;">
-                    <div id="_sub_center_sj" style="border-top: 0px"
-                         data-options="region:'center',noheader:true,border:false">
-                        <div id="sj_menu" style="width: 100%;">
-                            <table width="100%">
-                                <tr>
-                                    <td width="82%">
-                                        <p>&nbsp;&nbsp;</p>
-                                    </td>
-                                    <td width="6%">
-                                        <a href="javascript:void(0)"
-                                           class="easyui-linkbutton"
-                                           data-options="iconCls:'icon-add',text:'添加'" id="sj_add">添加</a>
-                                    </td>
-                                    <td width="6%">
-                                        <a href="javascript:void(0)"
-                                           class="easyui-linkbutton"
-                                           data-options="iconCls:'icon-edit',text:'添加'" id="sj_edit">修改</a>
-                                    </td>
-                                    <td width="6%">
-                                        <a href="javascript:void(0)"
-                                           class="easyui-linkbutton "
-                                           data-options="iconCls:'icon-remove',text:'删除'" id="sj_delete">删除</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <table id="sj_dg" class="easyui-datagrid" style="width:100%;height:440px;padding: 20px;"
-                               data-options="singleSelect:true">
-                            <thead>
+            <div title="设计效果图 &nbsp;&nbsp;">
+                <div id="_sub_center_sj" style="border-top: 0px"
+                     data-options="region:'center',noheader:true,border:false">
+                    <div id="sj_menu" style="width: 100%;">
+                        <table width="100%">
                             <tr>
-                                <th data-options="field:'id',hidden:true">
-                                    图片id号
-                                </th>
-                                <th data-options="field:'name',halign:'center',width:'250',align:'left',sortable:true">
-                                    图片名称
-                                </th>
-                                <th data-options="field:'url',hidden:true">
-                                    图片url
-                                </th>
-                                <th data-options="field:'urlfix',hidden:true">
-                                    图片url
-                                </th>
-                                <th data-options="field:'content',width:600" editor="{type:'textbox'}">图片描述</th>
+                                <td width="82%">
+                                    <p>&nbsp;&nbsp;</p>
+                                </td>
+                                <td width="6%">
+                                    <a href="javascript:void(0)"
+                                       class="easyui-linkbutton"
+                                       data-options="iconCls:'icon-add',text:'添加'" id="sj_add">添加</a>
+                                </td>
+                                <td width="6%">
+                                    <a href="javascript:void(0)"
+                                       class="easyui-linkbutton"
+                                       data-options="iconCls:'icon-edit',text:'添加'" id="sj_edit">修改</a>
+                                </td>
+                                <td width="6%">
+                                    <a href="javascript:void(0)"
+                                       class="easyui-linkbutton "
+                                       data-options="iconCls:'icon-remove',text:'删除'" id="sj_delete">删除</a>
+                                </td>
                             </tr>
-                            </thead>
                         </table>
                     </div>
-                </div>
-                <div title="空间效果图 &nbsp;&nbsp;">
-                    <div id="_sub_center2" style="border-top: 0px"
-                         data-options="region:'center',noheader:true,border:false">
-                        <div id="xg_menu" style="width: 100%;">
-                            <table width="100%">
-                                <tr>
-                                    <td width="82%">
-                                        <p>&nbsp;&nbsp;</p>
-                                    </td>
-                                    <td width="6%">
-                                        <a href="javascript:void(0)"
-                                           class="easyui-linkbutton"
-                                           data-options="iconCls:'icon-add',text:'添加'" id="xg_add">添加</a>
-                                    </td>
-                                    <td width="6%">
-                                        <a href="javascript:void(0)"
-                                           class="easyui-linkbutton"
-                                           data-options="iconCls:'icon-edit',text:'添加'" id="xg_edit">修改</a>
-                                    </td>
-                                    <td width="6%">
-                                        <a href="javascript:void(0)"
-                                           class="easyui-linkbutton "
-                                           data-options="iconCls:'icon-remove',text:'删除'" id="xg_delete">删除</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                        <table id="xg_dg" class="easyui-datagrid" style="width:100%;height:440px;padding: 20px;"
-                               data-options="singleSelect:true">
-                            <thead>
-                            <tr>
-                                <th data-options="field:'id',hidden:true">
-                                    图片id号
-                                </th>
-                                <th data-options="field:'name',halign:'center',width:'250',align:'left',sortable:true">
-                                    图片名称
-                                </th>
-                                <th data-options="field:'url',hidden:true">
-                                    图片url
-                                </th>
-                                <th data-options="field:'urlfix',hidden:true">
-                                    图片url
-                                </th>
-                                <th data-options="field:'content',width:600" editor="{type:'textbox'}">图片描述</th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
+                    <table id="sj_dg" class="easyui-datagrid" style="width:100%;height:440px;padding: 20px;"
+                           data-options="singleSelect:true">
+                        <thead>
+                        <tr>
+                            <th data-options="field:'id',hidden:true">
+                                图片id号
+                            </th>
+                            <th data-options="field:'name',halign:'center',width:'250',align:'left',sortable:true">
+                                图片名称
+                            </th>
+                            <th data-options="field:'type',width:'250',required:true" editor="{type:'combobox',options:{valueField:'id',textField:'text',
+                            data:[{id:'1',text:'设计效果图'},{id:'2',text:'空间效果图'},{id:'3',text:'软装搭配设计'},{id:'4',text:'客户回访照'}]}}">
+                                图片类型
+                            </th>
+                            <th data-options="field:'url',hidden:true">
+                                图片url
+                            </th>
+                            <th data-options="field:'urlfix',hidden:true">
+                                图片url
+                            </th>
+                            <th data-options="field:'content',width:600" editor="{type:'textbox'}">图片描述</th>
+                        </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
@@ -180,8 +133,15 @@
                             if (data.status == 1) {
                                 var dgdata = data.rows;
                                 dgdata.name = _fileName;
-                                dgdata.content = _fileName.substring(0,_fileName.indexOf("."));
+                                dgdata.content = _fileName.substring(0, _fileName.indexOf("."));
                                 common.insertRow("sj_dg", dgdata);
+                                if (locksj != null) {
+                                    $("#sj_dg").datagrid("endEdit", locksj);
+                                }
+                                //打开第一行的编辑
+                                locksj = 0;
+                                $("#sj_dg").datagrid("beginEdit", locksj);
+
                                 $('#sj_fileUpload').replaceWith('<input id="sj_fileUpload" type="file" name="upload" style="display: none" />');
                             } else {
                                 messager.msg(3, data.messagecode);
@@ -195,40 +155,40 @@
                 );
             });
         });
-
-        $("#xg_add").click(function () {
-            $("#xg_fileUpload").trigger('click');
-            $("#xg_fileUpload").on('change', function () {
-                var filePathStr = $(this).val();
-                if (!(/[.]/.exec(filePathStr))) {
-                    messager.msg(3, "文件格式不正确,请重新上传");
-                    return;
-                }
-                var _fileName = filePathStr.replace(/.*(\/|\\)/, "");
-                $("#xg_formUpload").ajaxSubmit(
-                    {
-                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
-                        type: 'post', // 提交方式 get/post
-                        url: '/fileupload.do', // 需要提交的 url
-                        success: function (data) { // data 保存提交后返回的数据，一般为 json 数据
-                            if (data.status == 1) {
-                                var dgdata = data.rows;
-                                dgdata.name = _fileName;
-                                dgdata.content = _fileName.substring(0,_fileName.indexOf("."));
-                                common.insertRow("xg_dg", dgdata);
-                                $('#xg_fileUpload').replaceWith('<input id="xg_fileUpload" type="file" name="upload" style="display: none" />');
-                            } else {
-                                messager.msg(3, data.messagecode);
-                            }
-                        },
-                        error: function (data) {
-                            messager.msg(3, "上传失败");
-                            console.log(data);
-                        }
-                    }
-                );
-            });
-        });
+//
+//        $("#xg_add").click(function () {
+//            $("#xg_fileUpload").trigger('click');
+//            $("#xg_fileUpload").on('change', function () {
+//                var filePathStr = $(this).val();
+//                if (!(/[.]/.exec(filePathStr))) {
+//                    messager.msg(3, "文件格式不正确,请重新上传");
+//                    return;
+//                }
+//                var _fileName = filePathStr.replace(/.*(\/|\\)/, "");
+//                $("#xg_formUpload").ajaxSubmit(
+//                    {
+//                        contentType: "application/x-www-form-urlencoded; charset=utf-8",
+//                        type: 'post', // 提交方式 get/post
+//                        url: '/fileupload.do', // 需要提交的 url
+//                        success: function (data) { // data 保存提交后返回的数据，一般为 json 数据
+//                            if (data.status == 1) {
+//                                var dgdata = data.rows;
+//                                dgdata.name = _fileName;
+//                                dgdata.content = _fileName.substring(0, _fileName.indexOf("."));
+//                                common.insertRow("xg_dg", dgdata);
+//                                $('#xg_fileUpload').replaceWith('<input id="xg_fileUpload" type="file" name="upload" style="display: none" />');
+//                            } else {
+//                                messager.msg(3, data.messagecode);
+//                            }
+//                        },
+//                        error: function (data) {
+//                            messager.msg(3, "上传失败");
+//                            console.log(data);
+//                        }
+//                    }
+//                );
+//            });
+//        });
 
 
         $("#sj_edit").click(function () {
@@ -245,19 +205,19 @@
             }
         );
 
-        $("#xg_edit").click(function () {
-                var _rowData = $("#xg_dg").datagrid("getSelected");
-                if (_rowData == null || _rowData == undefined) {
-                    messager.msg(3);// 无数据时提示窗
-                    return;
-                }
-                if (lockxg != null) {
-                    $("#xg_dg").datagrid("endEdit", lockxg);
-                }
-                lockxg = $("#xg_dg").datagrid('getRowIndex', _rowData);
-                $("#xg_dg").datagrid("beginEdit", lockxg);
-            }
-        );
+//        $("#xg_edit").click(function () {
+//                var _rowData = $("#xg_dg").datagrid("getSelected");
+//                if (_rowData == null || _rowData == undefined) {
+//                    messager.msg(3);// 无数据时提示窗
+//                    return;
+//                }
+//                if (lockxg != null) {
+//                    $("#xg_dg").datagrid("endEdit", lockxg);
+//                }
+//                lockxg = $("#xg_dg").datagrid('getRowIndex', _rowData);
+//                $("#xg_dg").datagrid("beginEdit", lockxg);
+//            }
+//        );
 
         $("#sj_delete").click(
             function () {
@@ -279,42 +239,50 @@
                 });
             });
 
-        $("#xg_delete").click(
-            function () {
-                var rows = $("#xg_dg").datagrid("getSelected");
-                if (rows == null || rows.length == 0) {
-                    messager.msg(3, "请选择要删除的附件信息！");
-                    return;
-                }
-                $.messager.confirm("提示信息", "确定要删除该图片吗", function (r) {
-                    if (r) {
-                        ajaxUtil.post("/deleteFile.do", {urlfix: rows.urlfix}, false, function (data) {
-                            if (data.status == 1) {
-                                messager.msg(3, "删除附件信息成功");
-                            }
-                        });
-                        var index = $("#xg_dg").datagrid("getRowIndex", rows);
-                        $("#xg_dg").datagrid("deleteRow", index);
-                    }
-                });
-            });
+//        $("#xg_delete").click(
+//            function () {
+//                var rows = $("#xg_dg").datagrid("getSelected");
+//                if (rows == null || rows.length == 0) {
+//                    messager.msg(3, "请选择要删除的附件信息！");
+//                    return;
+//                }
+//                $.messager.confirm("提示信息", "确定要删除该图片吗", function (r) {
+//                    if (r) {
+//                        ajaxUtil.post("/deleteFile.do", {urlfix: rows.urlfix}, false, function (data) {
+//                            if (data.status == 1) {
+//                                messager.msg(3, "删除附件信息成功");
+//                            }
+//                        });
+//                        var index = $("#xg_dg").datagrid("getRowIndex", rows);
+//                        $("#xg_dg").datagrid("deleteRow", index);
+//                    }
+//                });
+//            });
 
         $("#insert_des_ok").click(function () {
                 if (locksj != null) {
                     $("#sj_dg").datagrid("endEdit", locksj);
                 }
-                if (lockxg != null) {
-                    $("#xg_dg").datagrid("endEdit", lockxg);
-                }
+//                if (lockxg != null) {
+//                    $("#xg_dg").datagrid("endEdit", lockxg);
+//                }
                 $.messager.confirm("提示信息", "确定要保存信息码", function (r) {
                     if (r) {
+                        debugger;
                         var sjRowsData = $("#sj_dg").datagrid('getRows');
-                        var xgRowsData = $("#xg_dg").datagrid('getRows');
+                        for(var i=0;i<sjRowsData.length;i++){
+                            if(sjRowsData[i].type=="") {
+                                messager.msg(3, "请编辑选择图片类型");
+                                return false;
+                            }
+                        }
+
+//                        var xgRowsData = $("#xg_dg").datagrid('getRows');
                         var rdata = {
                             liningcode: $("#_lining_code").textbox("getValue"),
                             designname: $("#_design_name").textbox("getValue"),
-                            sjlist: JSON.stringify(sjRowsData),
-                            xglist: JSON.stringify(xgRowsData)
+                            sjlist: JSON.stringify(sjRowsData)
+//                            xglist: JSON.stringify(xgRowsData)
                         }
                         ajaxUtil.post("/savedesigns.do", rdata, false, function (data) {
                             if (data.status == 1) {

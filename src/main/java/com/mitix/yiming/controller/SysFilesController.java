@@ -53,7 +53,7 @@ public class SysFilesController {
                 try {
                     InputStream inputStream = upload.getInputStream();
                     String fileStr = filePathComponent.getTempFolder() + filenamenew;
-                    ImageCompressUtil.saveMinPhoto(inputStream, fileStr, (double) 1920, (double) 1);
+                    ImageCompressUtil.saveMinPhoto(inputStream, fileStr, (double) 5760, (double) 1);
                 } catch (IOException e) {
                     logger.error("文件保存失败", e);
                     Response response = new Response();
@@ -89,6 +89,9 @@ public class SysFilesController {
     @RequestMapping(value = "/deleteFile.do", method = RequestMethod.POST)
     @ResponseBody
     public Response deleteFile(String urlfix) {
+        if (urlfix == null || urlfix == "") {
+            return new Response();
+        }
         File filepath = new File(filePathComponent.getTempFolder(), urlfix);
         try {
             FileUtil.deleteFile(filepath);

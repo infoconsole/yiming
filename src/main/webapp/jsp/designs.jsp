@@ -45,6 +45,9 @@
                data-options="singleSelect:true">
             <thead>
             <tr>
+                <th data-options="field:'id',hidden:true,sortable:true">
+                    id
+                </th>
                 <th data-options="field:'liningcode',halign:'center',width:'180',align:'left',sortable:true">
                     面料编号(面料二维码)
                 </th>
@@ -88,10 +91,7 @@
                 return;
             }
             common.openWin("新增系列信息", "/showdesignsupdate.do",
-                1366, 768, "insertUpdateWin",{
-                    designcode: _rowData.designcode,
-                    liningcode: _rowData.liningcode
-                });
+                1366, 768, "insertUpdateWin", _rowData);
         });
 
         //删除按钮监听
