@@ -174,7 +174,7 @@
     <select id="listLiningsDesigns" parameterType="java.util.Map" resultType="com.mitix.yiming.bean.Designs">
         SELECT id,liningcode,designcode,designname FROM designs
         WHERE 1=1
-        <if test="liningcode != null and liningcode != ''">AND
+        <if test="liningcode != null and liningcode != ''">
             AND liningcode like concat('%',#{liningcode,jdbcType=VARCHAR},'%')
         </if>
     </select>

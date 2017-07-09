@@ -75,7 +75,7 @@
                                 图片名称
                             </th>
                             <th data-options="field:'type',width:'250',required:true" editor="{type:'combobox',options:{valueField:'id',textField:'text',
-                            data:[{id:'1',text:'设计效果图'},{id:'2',text:'空间效果图'},{id:'3',text:'软装搭配设计'},{id:'4',text:'客户回访照'}]}}">
+                            data:[{id:'设计效果图',text:'设计效果图'},{id:'空间效果图',text:'空间效果图'},{id:'软装搭配设计',text:'软装搭配设计'},{id:'客户回访照',text:'客户回访照'}]}}">
                                 图片类型
                             </th>
                             <th data-options="field:'url',hidden:true">
@@ -134,10 +134,11 @@
                                 var dgdata = data.rows;
                                 dgdata.name = _fileName;
                                 dgdata.content = _fileName.substring(0, _fileName.indexOf("."));
-                                common.insertRow("sj_dg", dgdata);
+                                //先保存
                                 if (locksj != null) {
                                     $("#sj_dg").datagrid("endEdit", locksj);
                                 }
+                                common.insertRow("sj_dg", dgdata);
                                 //打开第一行的编辑
                                 locksj = 0;
                                 $("#sj_dg").datagrid("beginEdit", locksj);

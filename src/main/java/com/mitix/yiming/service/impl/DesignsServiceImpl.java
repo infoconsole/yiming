@@ -28,6 +28,21 @@ public class DesignsServiceImpl implements DesignsService {
     @Autowired
     private FilePathComponent filePathComponent;
 
+    private static Map<String, String> dTypeMap = new HashMap<>();
+    private static Map<String, String> dlTypeMap = new HashMap<>();
+
+    {
+        dTypeMap.put("设计效果图", "1");
+        dTypeMap.put("空间效果图", "2");
+        dTypeMap.put("软装搭配设计", "3");
+        dTypeMap.put("客户回访照", "4");
+
+        dlTypeMap.put("1", "设计效果图");
+        dlTypeMap.put("2", "空间效果图");
+        dlTypeMap.put("3", "软装搭配设计");
+        dlTypeMap.put("4", "客户回访照");
+    }
+
     @Override
     @Transactional
     public void saveDesigns(String liningcode, String designname, List<DesFiles> sjlist/*, List<DesFiles> xglist*/) {
@@ -62,7 +77,7 @@ public class DesignsServiceImpl implements DesignsService {
                     throw new RuntimeException();
                 }
                 desFiles.setDesigncode(designcode);
-//                desFiles.setType("1");
+                desFiles.setType(dTypeMap.get(desFiles.getType()));
                 yiMingMapper.insertFiles(desFiles);
             }
         }
@@ -127,12 +142,14 @@ public class DesignsServiceImpl implements DesignsService {
                     throw new RuntimeException();
                 }
                 insertDesFile.setDesigncode(designs.getDesigncode());
+                insertDesFile.setType(dTypeMap.get(insertDesFile.getType()));
                 yiMingMapper.insertFiles(insertDesFile);
             }
         }
 
         if (updateDesFiles != null && updateDesFiles.size() > 0) {
             for (DesFiles updateDesFile : updateDesFiles) {
+                updateDesFile.setType(dTypeMap.get(updateDesFile.getType()));
                 yiMingMapper.updateDesFiles(updateDesFile);
             }
         }
@@ -187,7 +204,13 @@ public class DesignsServiceImpl implements DesignsService {
 
     @Override
     public List<DesFiles> listDesFilesByDesignCode(String designcode) {
-        return yiMingMapper.listDesFilesByDesignCode(designcode);
+        List<DesFiles> desFiles = yiMingMapper.listDesFilesByDesignCode(designcode);
+        if (desFiles != null && desFiles.size() > 0) {
+            for (DesFiles desFile : desFiles) {
+                desFile.setType(dlTypeMap.get(desFile.getType()));
+            }
+        }
+        return desFiles;
     }
 
 }
