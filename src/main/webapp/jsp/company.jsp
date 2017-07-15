@@ -81,6 +81,14 @@
                            style="height:100px;width: 100%">
                 </div>
             </tr>
+            <tr>
+                <div>
+                    <label class="label-top">产品优势:</label>
+                    <input id="advantage" name="advantage" class="easyui-textbox"
+                           data-options="prompt:'请输入产品优势...',multiline:true,required:false"
+                           style="height:100px;width: 100%">
+                </div>
+            </tr>
         </table>
     </form>
     <div style="text-align:center;padding:5px">

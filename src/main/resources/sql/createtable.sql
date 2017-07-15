@@ -74,3 +74,5 @@ CREATE TABLE files
 );
 
 ALTER TABLE yiming.files ADD name VARCHAR(64) NULL;
+
+ALTER TABLE yiming.company ADD advantage VARCHAR(2048) NULL;

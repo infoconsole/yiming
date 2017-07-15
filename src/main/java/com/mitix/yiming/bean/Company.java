@@ -15,6 +15,15 @@ public class Company {
     private String content;
     private String extend1;
     private String extend2;
+    private String advantage;
+
+    public String getAdvantage() {
+        return advantage;
+    }
+
+    public void setAdvantage(String advantage) {
+        this.advantage = advantage;
+    }
 
     public Integer getId() {
         return id;

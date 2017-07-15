@@ -35,6 +35,7 @@ public class SQLiteHelper {
                 "  \"TEL\"          TEXT,\n" +
                 "  \"JOINHANDS\"    TEXT,\n" +
                 "  \"SECURITYCODE\" TEXT,\n" +
+                "  \"ADVANTAGE\"    TEXT,\n" +
                 "  \"CONTENT\"      TEXT,\n" +
                 "  \"EXTEND1\"      TEXT,\n" +
                 "  \"EXTEND2\"      TEXT,\n" +
@@ -188,7 +189,7 @@ public class SQLiteHelper {
 
     private void insertCompany() throws SQLException {
         Company company = exportService.selectCompany();
-        StringBuffer sql = new StringBuffer(" INSERT INTO company(COMPANYNAME, LOGO, ADDRESS, TEL, JOINHANDS, WORKMANSHIP, SECURITYCODE, CONTENT, EXTEND1, EXTEND2) VALUES (");
+        StringBuffer sql = new StringBuffer(" INSERT INTO company(COMPANYNAME, LOGO, ADDRESS, TEL, JOINHANDS, WORKMANSHIP, SECURITYCODE, ADVANTAGE, CONTENT, EXTEND1, EXTEND2) VALUES (");
         sql.append("'").append(company.getCompanyname() == null ? "" : company.getCompanyname()).append("',");
         sql.append("'").append(company.getLogo() == null ? "" : company.getLogo()).append("',");
         sql.append("'").append(company.getAddress() == null ? "" : company.getAddress()).append("',");
@@ -196,6 +197,7 @@ public class SQLiteHelper {
         sql.append("'").append(company.getJoinhands() == null ? "" : company.getJoinhands()).append("',");
         sql.append("'").append(company.getWorkmanship() == null ? "" : company.getWorkmanship()).append("',");
         sql.append("'").append(company.getSecuritycode() == null ? "" : company.getSecuritycode()).append("',");
+        sql.append("'").append(company.getAdvantage() == null ? "" : company.getAdvantage()).append("',");
         sql.append("'").append(company.getContent() == null ? "" : company.getContent()).append("',");
         sql.append("'").append(company.getExtend1() == null ? "" : company.getExtend1()).append("',");
         sql.append("'").append(company.getExtend2() == null ? "" : company.getExtend2()).append("')");

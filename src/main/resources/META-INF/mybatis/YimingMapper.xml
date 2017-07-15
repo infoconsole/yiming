@@ -28,6 +28,9 @@
             <if test="securitycode != null and securitycode != ''">
                 securitycode = #{securitycode,jdbcType=VARCHAR},
             </if>
+            <if test="advantage != null and advantage != ''">
+                advantage = #{advantage,jdbcType=VARCHAR},
+            </if>
             <if test="content != null and content != ''">
                 content = #{content,jdbcType=VARCHAR},
             </if>
@@ -41,11 +44,11 @@
         WHERE 1=1 LIMIT 1
     </update>
     <insert id="insertCompany" parameterType="java.util.Map">
-        INSERT INTO company (companyname, logo, address, tel, joinhands, workmanship, securitycode, content, extend1, extend2)
+        INSERT INTO company (companyname, logo, address, tel, joinhands, workmanship, securitycode, content, extend1, extend2,advantage)
         VALUES (#{companyname, jdbcType = VARCHAR},#{logo, jdbcType = VARCHAR},
         #{address, jdbcType = VARCHAR},#{tel, jdbcType = VARCHAR},#{joinhands, jdbcType = VARCHAR},
         #{workmanship, jdbcType = VARCHAR},#{securitycode, jdbcType = VARCHAR},#{content, jdbcType = VARCHAR},
-        #{extend1, jdbcType = VARCHAR},#{extend2, jdbcType = VARCHAR})
+        #{extend1, jdbcType = VARCHAR},#{extend2, jdbcType = VARCHAR},#{advantage, jdbcType = VARCHAR})
     </insert>
     <select id="selectCompany" resultType="com.mitix.yiming.bean.Company">
         SELECT
@@ -58,7 +61,8 @@
           securitycode,
           content,
           extend1,
-          extend2
+          extend2,
+          advantage
         FROM company
         LIMIT 1
     </select>

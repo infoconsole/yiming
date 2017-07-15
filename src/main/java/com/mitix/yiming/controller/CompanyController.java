@@ -62,6 +62,8 @@ public class CompanyController {
                     String extend1,
             @RequestParam(value = "extend2", required = false)
                     String extend2,
+            @RequestParam(value = "advantage", required = false)
+                    String advantage,
             MultipartFile file
     ) {
         String urlId = null;
@@ -84,7 +86,7 @@ public class CompanyController {
                 return "logo格式不正确";
             }
         }
-        companyService.saveorupdate(companyname, address, tel, joinhands, workmanship, securitycode, content, extend1, extend2, urlId);
+        companyService.saveorupdate(companyname, address, tel, joinhands, workmanship, securitycode, content, extend1, extend2, urlId,advantage);
         return "修改成功";
     }
 
@@ -118,7 +120,7 @@ public class CompanyController {
             response.reset();
             // 设置response的Header
             response.setCharacterEncoding("utf-8");
-            response.addHeader("Content-Disposition", "attachment;filename=app.db");
+            response.addHeader("Content-Disposition", "attachment;filename=curtain.db");
             response.addHeader("Content-Length", "" + res.length());
             toClient = new BufferedOutputStream(response.getOutputStream());
             response.setContentType("application/octet-stream");

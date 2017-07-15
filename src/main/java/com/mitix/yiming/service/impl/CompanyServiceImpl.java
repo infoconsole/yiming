@@ -19,7 +19,7 @@ public class CompanyServiceImpl implements CompanyService {
     private YiMingMapper yiMingMapper;
 
     @Override
-    public void saveorupdate(String companyname, String address, String tel, String joinhands, String workmanship, String securitycode, String content, String extend1, String extend2, String filenamenew) {
+    public void saveorupdate(String companyname, String address, String tel, String joinhands, String workmanship, String securitycode, String content, String extend1, String extend2, String filenamenew, String advantage) {
         int count = yiMingMapper.selectCompanyExists();
         Map<String, Object> param = new HashMap<>();
         param.put("companyname", companyname);
@@ -32,6 +32,7 @@ public class CompanyServiceImpl implements CompanyService {
         param.put("extend1", extend1);
         param.put("extend2", extend2);
         param.put("logo", filenamenew);
+        param.put("advantage", ContextUtils.formatter(advantage));
         if (count > 0) {
             yiMingMapper.updateCompany(param);
         } else {
@@ -45,6 +46,7 @@ public class CompanyServiceImpl implements CompanyService {
         company.setJoinhands(ContextUtils.reformatter(company.getJoinhands()));
         company.setWorkmanship(ContextUtils.reformatter(company.getWorkmanship()));
         company.setContent(ContextUtils.reformatter(company.getContent()));
+        company.setAdvantage(ContextUtils.reformatter(company.getAdvantage()));
         return company;
     }
 
