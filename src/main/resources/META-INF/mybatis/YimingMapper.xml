@@ -77,6 +77,12 @@
         VALUES (#{seriescode, jdbcType = VARCHAR},#{seriesname, jdbcType = VARCHAR},
         #{seriescontent, jdbcType = VARCHAR})
     </insert>
+    <update id="updateSeries" parameterType="java.util.Map">
+        UPDATE series
+        SET seriesname = #{seriesname, jdbcType = VARCHAR},
+        seriescontent = #{seriescontent, jdbcType = VARCHAR}
+        WHERE id = #{id, jdbcType = INTEGER}
+    </update>
     <select id="selectSeriesCombox" resultType="com.mitix.yiming.Combox">
         SELECT seriescode AS id,
                 concat(seriescode,'-',seriesname) AS text
@@ -101,8 +107,13 @@
     <select id="selectLinings" resultType="com.mitix.yiming.bean.Linings">
         SELECT  seriescode, liningcode, liningname, liningcolor, liningcolorurl,extend1,extend2 FROM linings where 1=1
     </select>
+    <select id="countLiningsBySeriesCode" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(1) FROM linings
+        WHERE seriescode = #{seriescode, jdbcType = VARCHAR}
+    </select>
     <select id="listSeriesLining" parameterType="java.util.Map" resultType="com.mitix.yiming.SeriesLining">
         SELECT
+        ts.id AS seriesid,
         ts.seriescode,
         ts.seriesname,
         ts.seriescontent,

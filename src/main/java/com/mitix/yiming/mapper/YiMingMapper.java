@@ -78,4 +78,8 @@ public interface YiMingMapper {
     void updateDesFiles(DesFiles updateDesFile);
 
     void deleteDesFiles(DesFiles deleteDesFile);
+
+    int updateSeries(Map<String, Object> param);
+
+    int countLiningsBySeriesCode(String seriescodeTouse);
 }

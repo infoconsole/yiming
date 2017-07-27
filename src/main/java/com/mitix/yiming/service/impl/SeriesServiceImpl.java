@@ -40,6 +40,19 @@ public class SeriesServiceImpl implements SeriesService {
         yiMingMapper.insertSeries(param);
     }
 
+    @Transactional
+    @Override
+    public boolean updateSeries(Integer id, String seriescode, String seriesname, String seriescontent, String extend1, String extend2) {
+        String seriescodeTouse = seriescode.trim();
+        Map<String, Object> param = new HashMap<>();
+        param.put("id", id);
+        param.put("seriescode", seriescodeTouse);
+        param.put("seriesname", seriesname);
+        param.put("seriescontent", ContextUtils.formatter(seriescontent));
+        int count = yiMingMapper.updateSeries(param);
+        return count > 0;
+    }
+
     @Override
     @Transactional
     public void saveLinings(String seriescode, String liningcode, String liningname, String liningcolor, String liningcolorurl) {
@@ -80,6 +93,10 @@ public class SeriesServiceImpl implements SeriesService {
         }
         yiMingMapper.deleteDesigns(liningcodeTouse);
         yiMingMapper.deleteLinings(liningcodeTouse);
+        int count = yiMingMapper.countLiningsBySeriesCode(seriescodeTouse);
+        if (count == 0) {
+            yiMingMapper.deleteSeries(seriescodeTouse);
+        }
 //        Map<String, Object> param = new HashMap<>();
 //        param.put("seriescode", seriescodeTouse);
 //        param.put("liningcode", liningcodeTouse);
@@ -99,6 +116,7 @@ public class SeriesServiceImpl implements SeriesService {
             }
         }
     }
+
 
     @Override
     public List<Combox> selectSeriesCombox() {

@@ -7,6 +7,8 @@ import com.mitix.yiming.Response;
 import com.mitix.yiming.ResponseObject;
 import com.mitix.yiming.SIDUtil;
 import com.mitix.yiming.SeriesLining;
+import com.mitix.yiming.bean.Designs;
+import com.mitix.yiming.bean.Series;
 import com.mitix.yiming.service.SeriesService;
 import com.mitix.yiming.service.impl.FilePathComponent;
 import org.slf4j.Logger;
@@ -43,6 +45,17 @@ public class SeriesController {
     }
 
 
+    @RequestMapping(value = "/showseriesupdate.do")
+    public String showeriesUpdate(SeriesLining seriesLining, ModelMap map) {
+        Series series = new Series();
+        series.setId(Integer.valueOf(seriesLining.getSeriesid()));
+        series.setSeriescode(seriesLining.getSeriescode());
+        series.setSeriesname(seriesLining.getSeriesname());
+        series.setSeriescontent(seriesLining.getSeriescontent());
+        map.put("Series", series);
+        return "seriesupdate";
+    }
+
     @RequestMapping(value = "/showliningsadd.do")
     public String showLiningsAdd(ModelMap model) {
         return "liningadd";
@@ -66,6 +79,35 @@ public class SeriesController {
         try {
             seriesService.saveSeries(seriescode, seriesname, seriescontent, extend1, extend2);
             return "success";
+        } catch (Exception e) {
+            logger.error("保存系列失败", e);
+            return e.getMessage();
+        }
+    }
+
+    @RequestMapping(value = "/updateseries.do", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
+    public
+    @ResponseBody
+    String updateseries(
+            @RequestParam(value = "id")
+                    Integer id,
+            @RequestParam(value = "seriescode")
+                    String seriescode,
+            @RequestParam(value = "seriesname", required = false)
+                    String seriesname,
+            @RequestParam(value = "seriescontent", required = false)
+                    String seriescontent,
+            @RequestParam(value = "extend1", required = false)
+                    String extend1,
+            @RequestParam(value = "extend2", required = false)
+                    String extend2) {
+        try {
+            boolean succ = seriesService.updateSeries(id, seriescode, seriesname, seriescontent, extend1, extend2);
+            if (succ) {
+                return "success";
+            } else {
+                return "数据更新不成功";
+            }
         } catch (Exception e) {
             logger.error("保存系列失败", e);
             return e.getMessage();

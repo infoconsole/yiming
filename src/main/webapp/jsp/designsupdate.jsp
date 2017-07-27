@@ -311,7 +311,7 @@
 
         //取消按钮监听
         $("#update_des_cancel").click(function () {
-            common.closeWin("insertDesWin");
+            common.closeWin("insertUpdateWin");
         });
     }
 

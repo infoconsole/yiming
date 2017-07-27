@@ -4,6 +4,7 @@ package com.mitix.yiming;
  * Created by oldflame on 2017/6/14.
  */
 public class SeriesLining {
+    private String seriesid;
     private String seriescode;
     private String seriesname;
     private String seriescontent;
@@ -11,6 +12,14 @@ public class SeriesLining {
     private String liningname;
     private String liningcolor;
     private String liningcolorurl;
+
+    public String getSeriesid() {
+        return seriesid;
+    }
+
+    public void setSeriesid(String seriesid) {
+        this.seriesid = seriesid;
+    }
 
     public String getSeriescode() {
         return seriescode;

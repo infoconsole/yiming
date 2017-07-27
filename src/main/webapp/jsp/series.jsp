@@ -34,6 +34,7 @@
                 <input id="name" name="sname" style="line-height:26px;border:1px solid #ccc">
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'" plain="true" id="_search">查询面料</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" id="_create_series">新增系列</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true" id="_update_series">修改系列</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true" id="_create_lining">新增面料</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true" id="_delete">删除面料</a>
             </div>
@@ -44,6 +45,8 @@
                data-options="singleSelect:true">
             <thead>
             <tr>
+                <th data-options="field:'seriesid',hidden:true"></th>
+                <th data-options="field:'seriescode',halign:'center',width:'180',align:'left',sortable:true" >系列编号(系列二维码)</th>
                 <th data-options="field:'seriescode',halign:'center',width:'180',align:'left',sortable:true" >系列编号(系列二维码)</th>
                 <th data-options="field:'seriesname',halign:'center',width:'180',align:'left',sortable:true" >系列名称（作为显示使用）</th>
                 <th data-options="field:'seriescontent',halign:'center',width:'650',align:'left',sortable:true" >系列描述（作为显示使用）</th>
@@ -77,6 +80,17 @@
             common.openWin("新增系列信息", "/showseriesadd.do",
                 800, 500, "insertSerWin");
         });
+
+        $("#_update_series").click(function () {
+            var _rowData=$("#series_dg").datagrid("getSelected");
+            if(_rowData == null || _rowData.length == 0){
+                messager.msg(3, "请选择要操作的数据！");
+                return;
+            }
+            common.openWin("新增系列信息", "/showseriesupdate.do",
+                800, 500, "insertUpdateSerWin",_rowData);
+        });
+
         //查询按钮监听
         $("#_create_lining").click(function () {
             common.openWin("新增面料信息", "/showliningsadd.do",

@@ -19,4 +19,6 @@ public interface SeriesService {
     List<SeriesLining> listSeriesLining(String scode, String sname);
 
     void deleteSeriesLinings(String seriescode, String liningcode);
+
+    boolean updateSeries(Integer id, String seriescode, String seriesname, String seriescontent, String extend1, String extend2);
 }

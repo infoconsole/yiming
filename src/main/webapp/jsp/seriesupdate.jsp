@@ -24,30 +24,33 @@
 </head>
 <body>
 <div class="easyui-layout" data-options="fit:true">
-    <form id="seriesff" method="post">
+    <form id="seriesfff" method="post">
         <div data-options="region:'north'" style="padding:10px;height: 390px">
             <div style="margin-bottom:20px;">
                 <label class="label-top">系列编号（二维码）:</label>
+                <input type="hidden" id="id" name="id" value="${Series.id}">
                 <input id="seriescode" name="seriescode" class="easyui-textbox"
-                       data-options="prompt:'请输入系列编号...',required:true" style="width:100%;">
+                       data-options="required:true,editable:false" style="width:100%;"
+                       value="${Series.seriescode}">
             </div>
             <div style="margin-bottom:20px;">
                 <label class="label-top">系列名称:</label>
                 <input id="seriesname" name="seriesname" class="easyui-textbox"
-                       data-options="prompt:'请输入系列名称...',required:false" style="width:100%;">
+                       data-options="prompt:'请输入系列名称...',required:false" style="width:100%;"
+                       value="${Series.seriesname}">
             </div>
             <div>
                 <label class="label-top">系列介绍信息:</label>
                 <input id="seriescontent" name="seriescontent" class="easyui-textbox"
                        data-options="prompt:'请输入系列介绍...',multiline:true,required:false"
-                       style="height:150px;width: 100%">
+                       style="height:150px;width: 100%" value="${Series.seriescontent}">
             </div>
         </div>
     </form>
     <div data-options="region:'south',border:false" style="text-align:right;padding:5px;">
-        <a id="insert_ser_ok" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
+        <a id="update_ser_ok" class="easyui-linkbutton" data-options="iconCls:'icon-ok'"
            href="javascript:void(0)" style="width:80px">保存</a>
-        <a id="insert_ser_cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
+        <a id="update_ser_cancel" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'"
            href="javascript:void(0)" style="width:80px">取消</a>
     </div>
 </div>
@@ -58,14 +61,14 @@
         init = true;
     };
 
-    $("#insert_ser_ok").click(function () {
-        $("#seriesff").form("submit", {
-            url: "/addseries.do",
+    $("#update_ser_ok").click(function () {
+        $("#seriesfff").form("submit", {
+            url: "/updateseries.do",
             success: function (data) {
                 if (data == "success") {
                     $("#series_dg").datagrid("reload");
                     messager.msg(3, "保存成功");
-                    common.closeWin("insertSerWin");
+                    common.closeWin("insertUpdateSerWin");
                 } else {
                     messager.msg(3, "保存失败:" + data);
                 }
@@ -74,8 +77,8 @@
     });
 
     //取消按钮监听
-    $("#insert_ser_cancel").click(function () {
-        common.closeWin("insertSerWin");
+    $("#update_ser_cancel").click(function () {
+        common.closeWin("insertUpdateSerWin");
     });
 </script>
 </body>
