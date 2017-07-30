@@ -76,3 +76,7 @@ CREATE TABLE files
 ALTER TABLE yiming.files ADD name VARCHAR(64) NULL;
 
 ALTER TABLE yiming.company ADD advantage VARCHAR(2048) NULL;
+
+ALTER TABLE yiming.company CHANGE COLUMN tel tel varchar(64) DEFAULT NULL;
+
+ALTER TABLE `yiming`.`company` CHANGE COLUMN `advantage` `advantage` varchar(5000) DEFAULT NULL;

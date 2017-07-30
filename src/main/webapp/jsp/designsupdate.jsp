@@ -298,7 +298,7 @@
                         ajaxUtil.post("/updatedesigns.do", rdata, false, function (data) {
                             if (data.status == 1) {
                                 common.loadDateGrid("designs_dg")//刷新主页面到第一页
-                                common.closeWin("insertDesWin");
+                                common.closeWin("insertUpdateWin");
                                 messager.msg(3, "保存信息成功");
                             } else {
                                 messager.msg(3, data.messagecode);
