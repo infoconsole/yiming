@@ -7,6 +7,7 @@ import com.mitix.yiming.bean.DesFiles;
 import com.mitix.yiming.bean.Designs;
 import com.mitix.yiming.bean.Linings;
 import com.mitix.yiming.bean.Series;
+import com.mitix.yiming.bean.Visit;
 
 import java.util.List;
 import java.util.Map;
@@ -82,4 +83,12 @@ public interface YiMingMapper {
     int updateSeries(Map<String, Object> param);
 
     int countLiningsBySeriesCode(String seriescodeTouse);
+
+    List<Visit> listVisits(Map<String, Object> param);
+
+    void deleteVisit(String visitcodeTouse);
+
+    int selectVisitExists(Map<String, Object> param);
+
+    void insertVisits(Visit visit);
 }

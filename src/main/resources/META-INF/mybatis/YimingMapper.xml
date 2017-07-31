@@ -149,6 +149,7 @@
           f.id,
           f.type,
           f.url,
+          f.urlfix,
           f.content
         FROM files f
         WHERE f.designcode =#{designcode, jdbcType = VARCHAR}
@@ -226,4 +227,19 @@
         DELETE  FROM files
         WHERE  id = #{id,jdbcType=INTEGER}
     </delete>
+    <select id="listVisits" parameterType="java.util.Map" resultType="com.mitix.yiming.bean.Visit">
+        SELECT t.id,t.visitcode,t.visitname
+        FROM visit t
+    </select>
+    <delete id="deleteVisit" parameterType="java.lang.String">
+        DELETE FROM visit
+        WHERE visitcode = #{visitcode, jdbcType = VARCHAR}
+    </delete>
+    <select id="selectVisitExists" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(1) FROM visit
+        WHERE (visitcode = #{visitcode, jdbcType = VARCHAR} or visitname = #{visitname, jdbcType = VARCHAR})
+    </select>
+    <insert id="insertVisits" parameterType="com.mitix.yiming.bean.Visit" >
+        INSERT INTO visit (visitcode,visitname) VALUES (#{visitcode, jdbcType = VARCHAR} , #{visitname, jdbcType = VARCHAR})
+    </insert>
 </mapper>

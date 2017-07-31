@@ -80,3 +80,14 @@ ALTER TABLE yiming.company ADD advantage VARCHAR(2048) NULL;
 ALTER TABLE yiming.company CHANGE COLUMN tel tel varchar(64) DEFAULT NULL;
 
 ALTER TABLE `yiming`.`company` CHANGE COLUMN `advantage` `advantage` varchar(5000) DEFAULT NULL;
+
+
+CREATE TABLE visit
+(
+  id INT UNSIGNED AUTO_INCREMENT,
+  visitcode VARCHAR(32),
+  designname VARCHAR(128),
+  extend1    VARCHAR(128),
+  extend2    VARCHAR(128),
+  PRIMARY KEY (id)
+);

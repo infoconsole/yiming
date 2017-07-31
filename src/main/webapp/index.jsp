@@ -44,6 +44,12 @@
                         href: 'jsp/designs.jsp',
                         closable: true
                     });
+                } else if (title == "回访照维护") {
+                    $('#tt').tabs('add', {
+                        title: '回访照维护',
+                        href: 'jsp/visit.jsp',
+                        closable: true
+                    });
                 }
             }
         }
@@ -68,6 +74,9 @@
                 <br/>
                 <a id="btn3" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true"
                    onclick="opentitle('设计款式维护')">设计款式维护</a>
+                <br/>
+                <a id="btn4" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true"
+                   onclick="opentitle('回访照维护')">回访照维护</a>
             </div>
         </div>
     </div>
