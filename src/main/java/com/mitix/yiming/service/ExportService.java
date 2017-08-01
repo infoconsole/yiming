@@ -5,6 +5,7 @@ import com.mitix.yiming.bean.DesFiles;
 import com.mitix.yiming.bean.Designs;
 import com.mitix.yiming.bean.Linings;
 import com.mitix.yiming.bean.Series;
+import com.mitix.yiming.bean.Visit;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface ExportService {
     List<Designs> selectDesigns();
 
     List<DesFiles> selectDesFiles();
+
+    List<Visit> selectVisit();
 }

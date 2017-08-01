@@ -230,6 +230,10 @@
     <select id="listVisits" parameterType="java.util.Map" resultType="com.mitix.yiming.bean.Visit">
         SELECT t.id,t.visitcode,t.visitname
         FROM visit t
+        WHERE 1=1
+        <if test="visitname != null and visitname != ''">
+            AND t.visitname LIKE concat('%',#{visitname,jdbcType=VARCHAR},'%')
+        </if>
     </select>
     <delete id="deleteVisit" parameterType="java.lang.String">
         DELETE FROM visit

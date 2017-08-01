@@ -5,6 +5,7 @@ import com.mitix.yiming.bean.DesFiles;
 import com.mitix.yiming.bean.Designs;
 import com.mitix.yiming.bean.Linings;
 import com.mitix.yiming.bean.Series;
+import com.mitix.yiming.bean.Visit;
 import com.mitix.yiming.service.ExportService;
 
 import java.sql.Connection;
@@ -73,8 +74,16 @@ public class SQLiteHelper {
                 "  \"EXTEND1\"       TEXT,\n" +
                 "  \"EXTEND2\"       TEXT\n" +
                 ")");
+        tableSql.add("CREATE TABLE \"visit\" (" + //
+                "\"ID\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
+                "\"VISITCODE\" TEXT," + // 1: visitcode
+                "\"VISITNAME\" TEXT," + // 2: visitname
+                "\"EXTEND1\" TEXT," + // 3: extend1
+                "\"EXTEND2\" TEXT);"); // 4: extend2
         tableSql.add("CREATE TABLE if not exists 'android_metadata' ('locale' TEXT DEFAULT 'zh_CN')");
         tableSql.add("INSERT INTO 'android_metadata' VALUES ('zh_CN')");
+
+
     }
 
 
@@ -112,6 +121,7 @@ public class SQLiteHelper {
             insertLinings();
             insertDesigns();
             insertFiles();
+            insertVisit();
             updateSqliteSeq();
         } catch (Exception e) {
             e.printStackTrace();
@@ -120,6 +130,20 @@ public class SQLiteHelper {
             destroy();
         }
 
+    }
+
+    private void insertVisit() throws SQLException {
+        List<Visit> visitList = exportService.selectVisit();
+        if (visitList != null && visitList.size() > 0) {
+            for (Visit visit : visitList) {
+                StringBuffer sql = new StringBuffer(" INSERT INTO visit (VISITCODE, VISITNAME, EXTEND1, EXTEND2) VALUES (");
+                sql.append("'").append(visit.getVisitcode() == null ? "" : visit.getVisitcode()).append("',");
+                sql.append("'").append(visit.getVisitname() == null ? "" : visit.getVisitname()).append("',");
+                sql.append("'").append(visit.getExtend1() == null ? "" : visit.getExtend1()).append("',");
+                sql.append("'").append(visit.getExtend2() == null ? "" : visit.getExtend2()).append("')");
+                stat.executeUpdate(sql.toString());
+            }
+        }
     }
 
     private void updateSqliteSeq() {
