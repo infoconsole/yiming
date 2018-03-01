@@ -95,6 +95,17 @@
                         </div>
                     </form>
                 </div>
+                <div data-options="region:'center',border:false" style="height:60px">
+                    <div id="tb2" style="padding:10px">
+                        <span>输入设备号:</span>
+                        <input id="_dvcode" name="dvcode" style="line-height:26px;border:1px solid #ccc">
+                        <span>密码结果:</span>
+                        <input id="_dvpwd" name="dvpwd" style="line-height:26px;border:1px solid #ccc"
+                               data-options="editable:false">
+                        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+                           plain="true" id="pwd_btn">计算密码</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -118,6 +129,16 @@
                 if (data.status == 1) {
                     messager.msg(3, "图片整理完成");
                 }
+            });
+        });
+
+        $("#pwd_btn").click(function () {
+            var dvcode = $("#_dvcode").val();
+            if (dvcode == "") {
+                messager.msg(3, "设备号不能为空");
+            }
+            ajaxUtil.post("/dvpwd.do", {dvcode: dvcode}, false, function (data) {
+                $("#_dvpwd").val(data);
             });
         });
     }

@@ -2,6 +2,7 @@ package com.mitix.yiming.controller;
 
 import com.mitix.yiming.FileUtil;
 import com.mitix.yiming.ImageCompressUtil;
+import com.mitix.yiming.MD5Util;
 import com.mitix.yiming.Response;
 import com.mitix.yiming.ResponseObject;
 import com.mitix.yiming.SIDUtil;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -109,5 +111,12 @@ public class SysFilesController {
         return new Response();
     }
 
+    @RequestMapping(value = "/dvpwd.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String dvPwd(
+            @RequestParam(value = "dvcode", required = true)
+                    String dvcode) {
+        return MD5Util.getsSecurityCdode(dvcode);
+    }
 
 }
