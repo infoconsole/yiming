@@ -7,7 +7,6 @@ import com.mitix.yiming.Response;
 import com.mitix.yiming.ResponseObject;
 import com.mitix.yiming.SIDUtil;
 import com.mitix.yiming.SeriesLining;
-import com.mitix.yiming.bean.Designs;
 import com.mitix.yiming.bean.Series;
 import com.mitix.yiming.service.SeriesService;
 import com.mitix.yiming.service.impl.FilePathComponent;
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

@@ -246,4 +246,22 @@
     <insert id="insertVisits" parameterType="com.mitix.yiming.bean.Visit" >
         INSERT INTO visit (visitcode,visitname) VALUES (#{visitcode, jdbcType = VARCHAR} , #{visitname, jdbcType = VARCHAR})
     </insert>
+    <select id="selectVisitsById" parameterType="java.lang.Integer" resultType="com.mitix.yiming.bean.Visit">
+        SELECT t.id,t.visitcode,t.visitname
+        FROM visit t
+        WHERE id=#{visitid,jdbcType=INTEGER}
+    </select>
+    <select id="selectVisitExistsByCode" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(1) FROM visit
+        WHERE visitcode = #{visitcode, jdbcType = VARCHAR}
+    </select>
+    <update id="updateVisitById" parameterType="java.util.Map" >
+        update visit set visitname=#{visitname, jdbcType = VARCHAR}
+        where id=#{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectVisitWithOutExists" parameterType="java.util.Map" resultType="java.lang.Integer">
+        SELECT count(1) FROM visit
+        WHERE visitcode != #{visitcode, jdbcType = VARCHAR}
+        AND visitname = #{visitname, jdbcType = VARCHAR}
+    </select>
 </mapper>

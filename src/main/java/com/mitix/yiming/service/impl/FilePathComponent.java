@@ -1,7 +1,6 @@
 package com.mitix.yiming.service.impl;
 
 import com.mitix.yiming.FileUtil;
-import com.mitix.yiming.controller.CompanyController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;

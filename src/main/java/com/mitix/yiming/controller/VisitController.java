@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -83,6 +84,49 @@ public class VisitController {
             response.setMessagecode("保存图片出错");
             return response;
         }
+    }
 
+    @RequestMapping(value = "/updatevisits.do", method = RequestMethod.POST)
+    @ResponseBody
+    public Response updateVisits(
+            @RequestParam(value = "id")
+                    Integer id,
+            @RequestParam(value = "visitcode")
+                    String visitcode,
+            @RequestParam(value = "visitname")
+                    String visitname,
+            @RequestParam(value = "visitlist")
+                    String visitlist) {
+        try {
+            List<DesFiles> visitlistList = JSONUtils.toBeanList(visitlist, DesFiles.class);
+            visitService.updateVisitsDesigns(id, visitcode, visitname, visitlistList);
+            return new Response();
+        } catch (RuntimeException e) {
+            logger.error("出错1", e);
+            Response response = new Response();
+            response.setStatus(0);
+            response.setMessagecode(e.getMessage());
+            return response;
+        } catch (Exception e) {
+            logger.error("出错2", e);
+            Response response = new Response();
+            response.setStatus(0);
+            response.setMessagecode("保存回访照出错");
+            return response;
+        }
+    }
+
+
+    @RequestMapping(value = "/queryvisitfiles.do", method = RequestMethod.POST)
+    @ResponseBody
+    public Response querydesignsfiles(
+            @RequestParam(value = "visitid")
+                    Integer visitid) {
+        Visit visit = visitService.selectById(visitid);
+        String visitcode = visit.getVisitcode();
+        List<DesFiles> desFilesList = visitService.listDesFilesByVisitCode(visitcode);
+        ResponseObject<List<DesFiles>> responseObject = new ResponseObject<>();
+        responseObject.setRows(desFilesList);
+        return responseObject;
     }
 }

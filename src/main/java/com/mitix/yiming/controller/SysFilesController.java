@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,7 +54,17 @@ public class SysFilesController {
                 try {
                     InputStream inputStream = upload.getInputStream();
                     String fileStr = filePathComponent.getTempFolder() + filenamenew;
-                    ImageCompressUtil.saveMinPhoto(inputStream, fileStr, (double) 5760, (double) 1);
+                    if (prefix != null) {
+                        if (prefix.toUpperCase().equals("JPG") || prefix.toUpperCase().equals("JPEG")) {
+                            ImageCompressUtil.saveMinPhoto(inputStream, fileStr, (double) 5760, (double) 1);
+                        } else {
+                            File filepath = new File(fileStr);
+                            upload.transferTo(filepath);
+                        }
+                    } else {
+                        File filepath = new File(fileStr);
+                        upload.transferTo(filepath);
+                    }
                 } catch (IOException e) {
                     logger.error("文件保存失败", e);
                     Response response = new Response();

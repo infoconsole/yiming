@@ -91,4 +91,12 @@ public interface YiMingMapper {
     int selectVisitExists(Map<String, Object> param);
 
     void insertVisits(Visit visit);
+
+    Visit selectVisitsById(Integer visitid);
+
+    int selectVisitExistsByCode(String visitcodeTouse);
+
+    void updateVisitById(Map<String, Object> map);
+
+    int selectVisitWithOutExists(Map<String, Object> param1);
 }

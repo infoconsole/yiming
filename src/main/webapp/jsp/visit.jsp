@@ -33,8 +33,8 @@
                    id="_search_vi">查询类别</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add'" plain="true"
                    id="_create_vi">新增类别</a>
-<%--                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true"
-                   id="_update_vi">修改类别</a>--%>
+                <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" plain="true"
+                   id="_update_vi">修改类别</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove'" plain="true"
                    id="_delete_vi">删除类别</a>
             </div>
@@ -79,7 +79,7 @@
                 1366, 768, "insertViWin");
         });
 
-/*        //新建按钮
+        //新建按钮
         $("#_update_vi").click(function () {
 
             var _rowData = $("#visit_dg").datagrid("getSelected");
@@ -89,7 +89,7 @@
             }
             common.openWin("更新回访照信息", "/showvisitupdate.do",
                 1366, 768, "updateViWin", _rowData);
-        });*/
+        });
 
         //删除按钮监听
         $("#_delete_vi").click(function () {

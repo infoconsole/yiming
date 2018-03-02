@@ -11,4 +11,10 @@ public interface VisitService {
     void deleteVisit(String visitcode);
 
     void saveVisits(String visitname, List<DesFiles> sjlistList);
+
+    Visit selectById(Integer visitid);
+
+    List<DesFiles> listDesFilesByVisitCode(String visitcode);
+
+    void updateVisitsDesigns(Integer id,String visitcode, String visitname, List<DesFiles> visitlistList);
 }
